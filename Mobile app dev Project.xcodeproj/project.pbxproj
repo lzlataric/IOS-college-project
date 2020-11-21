@@ -11,6 +11,15 @@
 		54B7C1012566A57E0085B100 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B7C1002566A57E0085B100 /* ContentView.swift */; };
 		54B7C1032566A5800085B100 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54B7C1022566A5800085B100 /* Assets.xcassets */; };
 		54B7C1062566A5800085B100 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54B7C1052566A5800085B100 /* Preview Assets.xcassets */; };
+		54E6B45425692A4B00076D52 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E6B45325692A4B00076D52 /* User.swift */; };
+		54E6B45725692B1800076D52 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E6B45625692B1800076D52 /* UserData.swift */; };
+		54E6B45A25692C0E00076D52 /* SleepLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E6B45925692C0E00076D52 /* SleepLog.swift */; };
+		54E6B45D25692CD500076D52 /* WeightLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E6B45C25692CD500076D52 /* WeightLog.swift */; };
+		54E6B46125692D6B00076D52 /* WaterLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E6B46025692D6B00076D52 /* WaterLog.swift */; };
+		54E6B46525692E2400076D52 /* ExerciseLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E6B46425692E2400076D52 /* ExerciseLog.swift */; };
+		54E6B46825692EA300076D52 /* ExerciseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E6B46725692EA300076D52 /* ExerciseData.swift */; };
+		54E6B46B25692F1600076D52 /* FoodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E6B46A25692F1600076D52 /* FoodData.swift */; };
+		54E6B46E25692FF800076D52 /* FoodLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E6B46D25692FF800076D52 /* FoodLog.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +29,15 @@
 		54B7C1022566A5800085B100 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		54B7C1052566A5800085B100 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		54B7C1072566A5800085B100 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		54E6B45325692A4B00076D52 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		54E6B45625692B1800076D52 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		54E6B45925692C0E00076D52 /* SleepLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepLog.swift; sourceTree = "<group>"; };
+		54E6B45C25692CD500076D52 /* WeightLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightLog.swift; sourceTree = "<group>"; };
+		54E6B46025692D6B00076D52 /* WaterLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterLog.swift; sourceTree = "<group>"; };
+		54E6B46425692E2400076D52 /* ExerciseLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseLog.swift; sourceTree = "<group>"; };
+		54E6B46725692EA300076D52 /* ExerciseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseData.swift; sourceTree = "<group>"; };
+		54E6B46A25692F1600076D52 /* FoodData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodData.swift; sourceTree = "<group>"; };
+		54E6B46D25692FF800076D52 /* FoodLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodLog.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +70,7 @@
 		54B7C0FD2566A57E0085B100 /* Mobile app dev Project */ = {
 			isa = PBXGroup;
 			children = (
+				54E6B452256923F800076D52 /* Models */,
 				54B7C0FE2566A57E0085B100 /* Mobile_app_dev_ProjectApp.swift */,
 				54B7C1002566A57E0085B100 /* ContentView.swift */,
 				54B7C1022566A5800085B100 /* Assets.xcassets */,
@@ -67,6 +86,22 @@
 				54B7C1052566A5800085B100 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		54E6B452256923F800076D52 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				54E6B45325692A4B00076D52 /* User.swift */,
+				54E6B45625692B1800076D52 /* UserData.swift */,
+				54E6B45925692C0E00076D52 /* SleepLog.swift */,
+				54E6B45C25692CD500076D52 /* WeightLog.swift */,
+				54E6B46025692D6B00076D52 /* WaterLog.swift */,
+				54E6B46425692E2400076D52 /* ExerciseLog.swift */,
+				54E6B46725692EA300076D52 /* ExerciseData.swift */,
+				54E6B46A25692F1600076D52 /* FoodData.swift */,
+				54E6B46D25692FF800076D52 /* FoodLog.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,7 +174,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				54B7C1012566A57E0085B100 /* ContentView.swift in Sources */,
+				54E6B46E25692FF800076D52 /* FoodLog.swift in Sources */,
 				54B7C0FF2566A57E0085B100 /* Mobile_app_dev_ProjectApp.swift in Sources */,
+				54E6B45A25692C0E00076D52 /* SleepLog.swift in Sources */,
+				54E6B46B25692F1600076D52 /* FoodData.swift in Sources */,
+				54E6B45725692B1800076D52 /* UserData.swift in Sources */,
+				54E6B45D25692CD500076D52 /* WeightLog.swift in Sources */,
+				54E6B46125692D6B00076D52 /* WaterLog.swift in Sources */,
+				54E6B46525692E2400076D52 /* ExerciseLog.swift in Sources */,
+				54E6B46825692EA300076D52 /* ExerciseData.swift in Sources */,
+				54E6B45425692A4B00076D52 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
