@@ -11,10 +11,11 @@ import SwiftUI
 
 
 struct ContentView: View {
-    @ObservedObject var session = Session()
     
     var body: some View {
-        Test().environmentObject(session)
+        VStack {
+            WelcomePageView()
+        }
     }
 }
 

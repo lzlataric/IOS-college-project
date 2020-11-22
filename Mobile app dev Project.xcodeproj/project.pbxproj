@@ -12,8 +12,10 @@
 		54B7C1032566A5800085B100 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54B7C1022566A5800085B100 /* Assets.xcassets */; };
 		54B7C1062566A5800085B100 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54B7C1052566A5800085B100 /* Preview Assets.xcassets */; };
 		54D2D10C0E172D538B39FF94 /* Pods_Mobile_app_dev_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85ED56BF90113E3D4C14E792 /* Pods_Mobile_app_dev_Project.framework */; };
-		54D7D7CB256952D300E60A09 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D7D7CA256952D300E60A09 /* Test.swift */; };
 		54D7D7CF256958D000E60A09 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D7D7CE256958D000E60A09 /* Session.swift */; };
+		54D7D7DB256A998F00E60A09 /* WelcomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D7D7DA256A998F00E60A09 /* WelcomePageView.swift */; };
+		54D7D7E5256A9EF300E60A09 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D7D7E4256A9EF300E60A09 /* LoginView.swift */; };
+		54D7D7E9256AA2A200E60A09 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D7D7E8256AA2A200E60A09 /* SignUpView.swift */; };
 		54E6B45425692A4B00076D52 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E6B45325692A4B00076D52 /* User.swift */; };
 		54E6B45725692B1800076D52 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E6B45625692B1800076D52 /* UserData.swift */; };
 		54E6B45A25692C0E00076D52 /* SleepLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E6B45925692C0E00076D52 /* SleepLog.swift */; };
@@ -33,8 +35,10 @@
 		54B7C1022566A5800085B100 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		54B7C1052566A5800085B100 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		54B7C1072566A5800085B100 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		54D7D7CA256952D300E60A09 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		54D7D7CE256958D000E60A09 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		54D7D7DA256A998F00E60A09 /* WelcomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomePageView.swift; sourceTree = "<group>"; };
+		54D7D7E4256A9EF300E60A09 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		54D7D7E8256AA2A200E60A09 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		54E6B45325692A4B00076D52 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		54E6B45625692B1800076D52 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		54E6B45925692C0E00076D52 /* SleepLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepLog.swift; sourceTree = "<group>"; };
@@ -92,11 +96,12 @@
 		54B7C0FD2566A57E0085B100 /* Mobile app dev Project */ = {
 			isa = PBXGroup;
 			children = (
-				54E6B4702569419E00076D52 /* LifeCycle */,
+				54D7D7EB256AA2A600E60A09 /* Views */,
 				54E6B452256923F800076D52 /* Models */,
+				54E6B4702569419E00076D52 /* LifeCycle */,
 				54B7C1002566A57E0085B100 /* ContentView.swift */,
+				54D7D7DA256A998F00E60A09 /* WelcomePageView.swift */,
 				54D7D7CE256958D000E60A09 /* Session.swift */,
-				54D7D7CA256952D300E60A09 /* Test.swift */,
 				54B7C1022566A5800085B100 /* Assets.xcassets */,
 				54B7C1072566A5800085B100 /* Info.plist */,
 				54E6B4712569455C00076D52 /* GoogleService-Info.plist */,
@@ -111,6 +116,15 @@
 				54B7C1052566A5800085B100 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		54D7D7EB256AA2A600E60A09 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				54D7D7E4256A9EF300E60A09 /* LoginView.swift */,
+				54D7D7E8256AA2A200E60A09 /* SignUpView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		54E6B452256923F800076D52 /* Models */ = {
@@ -262,15 +276,17 @@
 				54D7D7CF256958D000E60A09 /* Session.swift in Sources */,
 				54B7C1012566A57E0085B100 /* ContentView.swift in Sources */,
 				54E6B46E25692FF800076D52 /* FoodLog.swift in Sources */,
+				54D7D7E5256A9EF300E60A09 /* LoginView.swift in Sources */,
 				54B7C0FF2566A57E0085B100 /* Mobile_app_dev_ProjectApp.swift in Sources */,
 				54E6B45A25692C0E00076D52 /* SleepLog.swift in Sources */,
 				54E6B46B25692F1600076D52 /* FoodData.swift in Sources */,
-				54D7D7CB256952D300E60A09 /* Test.swift in Sources */,
 				54E6B45725692B1800076D52 /* UserData.swift in Sources */,
 				54E6B45D25692CD500076D52 /* WeightLog.swift in Sources */,
 				54E6B46125692D6B00076D52 /* WaterLog.swift in Sources */,
 				54E6B46525692E2400076D52 /* ExerciseLog.swift in Sources */,
+				54D7D7E9256AA2A200E60A09 /* SignUpView.swift in Sources */,
 				54E6B46825692EA300076D52 /* ExerciseData.swift in Sources */,
+				54D7D7DB256A998F00E60A09 /* WelcomePageView.swift in Sources */,
 				54E6B45425692A4B00076D52 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
