@@ -32,38 +32,6 @@ struct WelcomePageView: View {
                     
                 }
                 
-                //                Button(action: {
-                //
-                //                }) {
-                //                    HStack {
-                //                        Image(systemName: "arrow")
-                //                            .font(.title)
-                //                        Text("Login")
-                //                            .fontWeight(.semibold)
-                //                            .font(.title)
-                //                    }
-                //                    .padding()
-                //                    .foregroundColor(.white)
-                //                    .background(Color.red)
-                //                    .cornerRadius(40)
-                //                }
-                
-                //            Button(action: {
-                //                print("Sign Up Tapped!")
-                //            }) {
-                //                HStack {
-                //                    Image(systemName: "arrow")
-                //                        .font(.title)
-                //                    Text("Sign up")
-                //                        .fontWeight(.semibold)
-                //                        .font(.title)
-                //                }
-                //                .padding()
-                //                .foregroundColor(.white)
-                //                .background(Color.red)
-                //                .cornerRadius(40)
-                //            }
-                
             }
         }
         

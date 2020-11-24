@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5452D470256D864A002EEF9B /* UserDataInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5452D46F256D864A002EEF9B /* UserDataInputView.swift */; };
 		54B7C0FF2566A57E0085B100 /* Mobile_app_dev_ProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B7C0FE2566A57E0085B100 /* Mobile_app_dev_ProjectApp.swift */; };
 		54B7C1012566A57E0085B100 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B7C1002566A57E0085B100 /* ContentView.swift */; };
 		54B7C1032566A5800085B100 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54B7C1022566A5800085B100 /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5452D46F256D864A002EEF9B /* UserDataInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataInputView.swift; sourceTree = "<group>"; };
 		54B7C0FB2566A57E0085B100 /* Mobile app dev Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mobile app dev Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		54B7C0FE2566A57E0085B100 /* Mobile_app_dev_ProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mobile_app_dev_ProjectApp.swift; sourceTree = "<group>"; };
 		54B7C1002566A57E0085B100 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 			children = (
 				54D7D7E4256A9EF300E60A09 /* LoginView.swift */,
 				54D7D7E8256AA2A200E60A09 /* SignUpView.swift */,
+				5452D46F256D864A002EEF9B /* UserDataInputView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				54D7D7E5256A9EF300E60A09 /* LoginView.swift in Sources */,
 				54B7C0FF2566A57E0085B100 /* Mobile_app_dev_ProjectApp.swift in Sources */,
 				54E6B45A25692C0E00076D52 /* SleepLog.swift in Sources */,
+				5452D470256D864A002EEF9B /* UserDataInputView.swift in Sources */,
 				54E6B46B25692F1600076D52 /* FoodData.swift in Sources */,
 				54E6B45725692B1800076D52 /* UserData.swift in Sources */,
 				54E6B45D25692CD500076D52 /* WeightLog.swift in Sources */,
