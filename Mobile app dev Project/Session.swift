@@ -9,7 +9,7 @@ import Foundation
 import Firebase
 import FirebaseAuth
 import FirebaseDatabase
-import Firestore
+//import Firestore
 
 
 class Session: ObservableObject {
@@ -27,24 +27,25 @@ class Session: ObservableObject {
     
     func storeData(firstName: String, lastName: String, age: String,gender: String, heigth: String, weight: String, weightTarget: String, documentId: String) {
         
-        Firestore.firestore()
-            .collection("User_Data")
-            .document(documentId)
-            .setData([
-                "age": age,
-                "gender": gender,
-                "height": heigth,
-                "weight": weight,
-                "weightTarget": weightTarget,
-                "lastName": lastName,
-                "firstName": firstName
-            ]) { err in
-                if let err = err {
-                    print("Error writing document: \(err)")
-                } else {
-                    print("Document successfully written!")
-                }
-            }
+        
+//        Firestore.firestore()
+//            .collection("User_Data")
+//            .document(documentId)
+//            .setData([
+//                "age": age,
+//                "gender": gender,
+//                "height": heigth,
+//                "weight": weight,
+//                "weightTarget": weightTarget,
+//                "lastName": lastName,
+//                "firstName": firstName
+//            ]) { err in
+//                if let err = err {
+//                    print("Error writing document: \(err)")
+//                } else {
+//                    print("Document successfully written!")
+//                }
+//            }
     }
     
 }

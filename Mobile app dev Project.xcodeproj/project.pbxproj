@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A6D32D21F988A182CC64867 /* Pods_Mobile_app_dev_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE178B188FEFA0C25EEDDE81 /* Pods_Mobile_app_dev_Project.framework */; };
 		5452D470256D864A002EEF9B /* UserDataInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5452D46F256D864A002EEF9B /* UserDataInputView.swift */; };
 		54B7C0FF2566A57E0085B100 /* Mobile_app_dev_ProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B7C0FE2566A57E0085B100 /* Mobile_app_dev_ProjectApp.swift */; };
 		54B7C1012566A57E0085B100 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B7C1002566A57E0085B100 /* ContentView.swift */; };
 		54B7C1032566A5800085B100 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54B7C1022566A5800085B100 /* Assets.xcassets */; };
 		54B7C1062566A5800085B100 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54B7C1052566A5800085B100 /* Preview Assets.xcassets */; };
-		54D2D10C0E172D538B39FF94 /* Pods_Mobile_app_dev_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85ED56BF90113E3D4C14E792 /* Pods_Mobile_app_dev_Project.framework */; };
 		54D7D7CF256958D000E60A09 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D7D7CE256958D000E60A09 /* Session.swift */; };
 		54D7D7DB256A998F00E60A09 /* WelcomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D7D7DA256A998F00E60A09 /* WelcomePageView.swift */; };
 		54D7D7E5256A9EF300E60A09 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D7D7E4256A9EF300E60A09 /* LoginView.swift */; };
@@ -51,9 +51,9 @@
 		54E6B46A25692F1600076D52 /* FoodData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodData.swift; sourceTree = "<group>"; };
 		54E6B46D25692FF800076D52 /* FoodLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodLog.swift; sourceTree = "<group>"; };
 		54E6B4712569455C00076D52 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		85ED56BF90113E3D4C14E792 /* Pods_Mobile_app_dev_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mobile_app_dev_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8697568E8EC93B1D24371F82 /* Pods-Mobile app dev Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mobile app dev Project.release.xcconfig"; path = "Target Support Files/Pods-Mobile app dev Project/Pods-Mobile app dev Project.release.xcconfig"; sourceTree = "<group>"; };
-		9929DACCFE7214BF7E87D7BE /* Pods-Mobile app dev Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mobile app dev Project.debug.xcconfig"; path = "Target Support Files/Pods-Mobile app dev Project/Pods-Mobile app dev Project.debug.xcconfig"; sourceTree = "<group>"; };
+		6767B668E8982CC85ECB16F8 /* Pods-Mobile app dev Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mobile app dev Project.release.xcconfig"; path = "Target Support Files/Pods-Mobile app dev Project/Pods-Mobile app dev Project.release.xcconfig"; sourceTree = "<group>"; };
+		A550C1B286B595ADB4EFC60D /* Pods-Mobile app dev Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mobile app dev Project.debug.xcconfig"; path = "Target Support Files/Pods-Mobile app dev Project/Pods-Mobile app dev Project.debug.xcconfig"; sourceTree = "<group>"; };
+		DE178B188FEFA0C25EEDDE81 /* Pods_Mobile_app_dev_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mobile_app_dev_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,18 +61,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54D2D10C0E172D538B39FF94 /* Pods_Mobile_app_dev_Project.framework in Frameworks */,
+				1A6D32D21F988A182CC64867 /* Pods_Mobile_app_dev_Project.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0BAC17E25153293FBBA95BD9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DE178B188FEFA0C25EEDDE81 /* Pods_Mobile_app_dev_Project.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		36F5B9073B2E13CE70A5DD39 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				9929DACCFE7214BF7E87D7BE /* Pods-Mobile app dev Project.debug.xcconfig */,
-				8697568E8EC93B1D24371F82 /* Pods-Mobile app dev Project.release.xcconfig */,
+				A550C1B286B595ADB4EFC60D /* Pods-Mobile app dev Project.debug.xcconfig */,
+				6767B668E8982CC85ECB16F8 /* Pods-Mobile app dev Project.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -83,7 +91,7 @@
 				54B7C0FD2566A57E0085B100 /* Mobile app dev Project */,
 				54B7C0FC2566A57E0085B100 /* Products */,
 				36F5B9073B2E13CE70A5DD39 /* Pods */,
-				99D122B6016D9ADE3E11950C /* Frameworks */,
+				0BAC17E25153293FBBA95BD9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -154,14 +162,6 @@
 			path = LifeCycle;
 			sourceTree = "<group>";
 		};
-		99D122B6016D9ADE3E11950C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				85ED56BF90113E3D4C14E792 /* Pods_Mobile_app_dev_Project.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -169,11 +169,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 54B7C10A2566A5800085B100 /* Build configuration list for PBXNativeTarget "Mobile app dev Project" */;
 			buildPhases = (
-				F7B8919413771A674DAF6AB6 /* [CP] Check Pods Manifest.lock */,
+				8815828B2389BFCAF97CB7FB /* [CP] Check Pods Manifest.lock */,
 				54B7C0F72566A57E0085B100 /* Sources */,
 				54B7C0F82566A57E0085B100 /* Frameworks */,
 				54B7C0F92566A57E0085B100 /* Resources */,
-				9F0B1AD73EE892B792C89EF0 /* [CP] Embed Pods Frameworks */,
+				CF7B838141FB171523E6885F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -230,24 +230,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		9F0B1AD73EE892B792C89EF0 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Mobile app dev Project/Pods-Mobile app dev Project-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Mobile app dev Project/Pods-Mobile app dev Project-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Mobile app dev Project/Pods-Mobile app dev Project-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F7B8919413771A674DAF6AB6 /* [CP] Check Pods Manifest.lock */ = {
+		8815828B2389BFCAF97CB7FB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -267,6 +250,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CF7B838141FB171523E6885F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Mobile app dev Project/Pods-Mobile app dev Project-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Mobile app dev Project/Pods-Mobile app dev Project-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Mobile app dev Project/Pods-Mobile app dev Project-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -416,13 +416,14 @@
 		};
 		54B7C10B2566A5800085B100 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9929DACCFE7214BF7E87D7BE /* Pods-Mobile app dev Project.debug.xcconfig */;
+			baseConfigurationReference = A550C1B286B595ADB4EFC60D /* Pods-Mobile app dev Project.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Mobile app dev Project/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
+				GCC_NO_COMMON_BLOCKS = NO;
 				INFOPLIST_FILE = "Mobile app dev Project/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -438,13 +439,14 @@
 		};
 		54B7C10C2566A5800085B100 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8697568E8EC93B1D24371F82 /* Pods-Mobile app dev Project.release.xcconfig */;
+			baseConfigurationReference = 6767B668E8982CC85ECB16F8 /* Pods-Mobile app dev Project.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Mobile app dev Project/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
+				GCC_NO_COMMON_BLOCKS = NO;
 				INFOPLIST_FILE = "Mobile app dev Project/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (

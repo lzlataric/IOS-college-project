@@ -16,7 +16,7 @@ struct SignUpView: View {
     @State var name: String = ""
     @State var lastname: String = ""
     let user = Auth.auth().currentUser
-    
+    @State private var shouldNavigate = false
     
     @EnvironmentObject var session: Session
     
@@ -26,8 +26,18 @@ struct SignUpView: View {
                 if error != nil {
                     print("Error sign up")
                 } else {
-                    //let user = Auth.auth().currentUser
-                    print(user?.email, user?.uid)
+                    self.session.logIn(email: email, password: password) { (result, error) in
+                        if error != nil {
+                            print("Error login")
+                        } else {
+                            let user = Auth.auth().currentUser
+
+                            print(user?.email, user?.uid)
+
+                            self.shouldNavigate = true
+
+                        }
+                    }
                 }
             }
         }
@@ -88,10 +98,14 @@ struct SignUpView: View {
                         .cornerRadius(40)
                     }
                 
-                NavigationLink(destination: UserDataInputView().environmentObject(session)) {
-                Text("Next")
-                    .fontWeight(.semibold)
-                    .font(.title)
+//                NavigationLink(destination: UserDataInputView().environmentObject(session)) {
+//                Text("Next")
+//                    .fontWeight(.semibold)
+//                    .font(.title)
+//                }
+                
+                NavigationLink(destination: UserDataInputView(), isActive: $shouldNavigate) {
+                    EmptyView()
                 }
                 
                 
