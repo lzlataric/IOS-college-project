@@ -17,9 +17,7 @@ struct LoginView: View {
     //MARK: Properties
     @State var email: String = ""
     @State var password: String = ""
-    let user = Auth.auth().currentUser
-    
-    
+    @State private var shouldNavigate = false
     
     
     @EnvironmentObject var session: Session
@@ -29,7 +27,10 @@ struct LoginView: View {
             if error != nil {
                 print("Error")
             } else {
+                let user = Auth.auth().currentUser
+
                 print(user?.email)
+                shouldNavigate = true
                 
             }
         }
@@ -44,9 +45,13 @@ struct LoginView: View {
             
             SecureField("Password", text: $password)
             Button(action: logIn) {
-                Text("Sign In")
+                Text("Login")
             }
             .padding()
+            
+            NavigationLink(destination: HomePage(), isActive: $shouldNavigate) {
+                EmptyView()
+            }
         }
         .padding()
     }

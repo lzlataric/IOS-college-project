@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct WelcomePageView: View {
-    @ObservedObject var session = Session()
+    
+    @EnvironmentObject var session: Session
     
     
     var body: some View {
         NavigationView {
             VStack {
-                NavigationLink(destination: LoginView().environmentObject(session)) {
+                NavigationLink(destination: LoginView()) {
                     Text("Log in")
                         .padding()
                         .foregroundColor(.white)
@@ -23,7 +24,7 @@ struct WelcomePageView: View {
                     
                 }
                 
-                NavigationLink(destination: SignUpView().environmentObject(session)) {
+                NavigationLink(destination: SignUpView()) {
                     Text("Sign up")
                         .padding()
                         .foregroundColor(.white)

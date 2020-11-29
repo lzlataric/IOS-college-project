@@ -8,11 +8,13 @@
 import Foundation
 
 struct UserData : Identifiable {
-    let id = UUID()
-    let gender: Int
-    let height: Double
-    let age: Int
-    let targetWeight: Double
-    let currentWeight: Double
-    let sleepTime: Double
+    var id = UUID()
+    var firstName: String
+    var lastName: String
+    var gender: String
+    var height: Double
+    var age: String
+    var targetWeight: String
+    var currentWeight: String
+    var sleepTime: String
 }

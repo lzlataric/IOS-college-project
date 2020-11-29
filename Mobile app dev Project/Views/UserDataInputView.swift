@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct UserDataInputView: View {
     @State var firstName: String = ""
@@ -15,15 +16,22 @@ struct UserDataInputView: View {
     @State var height: String = ""
     @State var weight: String = ""
     @State var weightTarget: String = ""
-
-    @ObservedObject var session = Session()
-
+    @State private var shouldNavigate = false
+    
+    @EnvironmentObject var session: Session
+    
+        func storeData() {
+            let user = Auth.auth().currentUser
+            print(user?.uid)
+            session.storeData(firstName: firstName, lastName: lastName, age: age, gender: gender, heigth: height, weight: weight, weightTarget: weightTarget, documentId: user!.uid)
+            shouldNavigate = true
+        }
+    
     
     
     var body: some View {
         
         VStack {
-            
             TextField(
                 "First Name",
                 text: $firstName
@@ -39,7 +47,7 @@ struct UserDataInputView: View {
             .autocapitalization(.none)
             .disableAutocorrection(true)
             .border(Color(UIColor.separator))
-
+            
             TextField(
                 "Age",
                 text: $age
@@ -47,7 +55,7 @@ struct UserDataInputView: View {
             .autocapitalization(.none)
             .disableAutocorrection(true)
             .border(Color(UIColor.separator))
-
+            
             TextField(
                 "Gender",
                 text: $gender
@@ -56,7 +64,7 @@ struct UserDataInputView: View {
             .disableAutocorrection(true)
             .border(Color(UIColor.separator))
             .padding(.bottom)
-
+            
             TextField(
                 "Height",
                 text: $height
@@ -65,7 +73,7 @@ struct UserDataInputView: View {
             .disableAutocorrection(true)
             .border(Color(UIColor.separator))
             .padding(.bottom)
-
+            
             TextField(
                 "Weight",
                 text: $weight
@@ -74,7 +82,7 @@ struct UserDataInputView: View {
             .disableAutocorrection(true)
             .border(Color(UIColor.separator))
             .padding(.bottom)
-
+            
             TextField(
                 "Targer Weight",
                 text: $weightTarget
@@ -84,7 +92,10 @@ struct UserDataInputView: View {
             .border(Color(UIColor.separator))
             .padding(.bottom)
             
-//            Button(action: signUp) {
+//            Button(action: {
+//                session.storeData(firstName: $firstName, lastName: $lastName, age: $age, gender: $gender, heigth: $height, weight: $weight, weightTarget: $weightTarget, documentId: user?.uid)
+//            })
+//            {
 //                HStack {
 //                    Image(systemName: "arrow")
 //                        .font(.title)
@@ -96,13 +107,32 @@ struct UserDataInputView: View {
 //                .foregroundColor(.white)
 //                .background(Color.red)
 //                .cornerRadius(40)
-//            }
+//            }//Button
             
-        
-        
-    }
-}
-}
+            Button(action: {
+                storeData()
+            }) {
+                HStack {
+                    Image(systemName: "arrow")
+                        .font(.title)
+                    Text("Next")
+                        .fontWeight(.semibold)
+                        .font(.title)
+                }
+                .padding()
+                .foregroundColor(.white)
+                .background(Color.red)
+                .cornerRadius(40)
+            }//Button
+            
+            NavigationLink(destination: HomePage(), isActive: $shouldNavigate) {
+                EmptyView()
+            }
+
+        }//VStack
+    }//Some View
+}///View
+
 
 struct UserDataInputView_Previews: PreviewProvider {
     static var previews: some View {

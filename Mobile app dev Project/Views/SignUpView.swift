@@ -15,7 +15,7 @@ struct SignUpView: View {
     @State var password: String = ""
     @State var name: String = ""
     @State var lastname: String = ""
-    let user = Auth.auth().currentUser
+    //let user = Auth.auth().currentUser
     @State private var shouldNavigate = false
     
     @EnvironmentObject var session: Session
@@ -65,24 +65,6 @@ struct SignUpView: View {
                 .autocapitalization(.none)
                 .disableAutocorrection(true)
                 .border(Color(UIColor.separator))
-                
-                //            TextField(
-                //                "Name",
-                //                text: $name
-                //            )
-                //            .autocapitalization(.none)
-                //            .disableAutocorrection(true)
-                //            .border(Color(UIColor.separator))
-                //
-                //            TextField(
-                //                "Last Name",
-                //                text: $lastname
-                //            )
-                //            .autocapitalization(.none)
-                //            .disableAutocorrection(true)
-                //            .border(Color(UIColor.separator))
-                //            .padding(.bottom)
-                
                 
                     Button(action: signUp) {
                         HStack {
