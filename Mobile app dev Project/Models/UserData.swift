@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct UserData : Identifiable {
-    var id = UUID()
+struct UserData : Codable, Identifiable {
+    var id: String
     var firstName: String
     var lastName: String
     var gender: String
-    var height: Double
+    var height: String
+    var weight: String
     var age: String
-    var targetWeight: String
-    var currentWeight: String
-    var sleepTime: String
+    var weightTarget: String
+    //var currentWeight: String
 }

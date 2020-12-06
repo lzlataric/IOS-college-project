@@ -3,7 +3,6 @@
 //  Mobile app dev Project
 //
 //  Created by Dominik Bosnjak on 21/11/2020.
-//
 
 import Foundation
 import Firebase
@@ -15,7 +14,7 @@ import FirebaseFirestore
 class Session: ObservableObject {
     @Published var session: User?
     
-    @Published private(set) var data: [UserData] = []
+    @Published private(set) var userData: UserData?
     
     func logIn(email: String, password: String, handler: @escaping AuthDataResultCallback) {
         Auth.auth().signIn(withEmail: email, password: password, completion: handler)
@@ -26,7 +25,6 @@ class Session: ObservableObject {
     }
     
     func storeData(firstName: String, lastName: String, age: String,gender: String, heigth: String, weight: String, weightTarget: String, documentId: String) {
-        
         
         Firestore.firestore()
             .collection("User_Data")
@@ -47,27 +45,4 @@ class Session: ObservableObject {
                 }
             }
     }
-    
-    func getUserInputData(documentId: String) {
-        
-        
-        Firestore.firestore()
-            .collection("User_Data")
-            .document(documentId)
-            .getDocument { (arg,err)  in
-                if let err = err {
-                    print("Error writing document: \(err)")
-                } else {
-                    if let arg = arg {
-                        
-                            //let data = document.data()
-                            //var data. = document.firstName()
-                        print(arg.data())
-                        
-                    }
-                 
-                }
-            }
-    }
-    
 }

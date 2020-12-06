@@ -23,7 +23,7 @@ struct UserDataInputView: View {
         func storeData() {
             let user = Auth.auth().currentUser
             print(user?.uid)
-            session.storeData(firstName: firstName, lastName: lastName, age: age, gender: gender, heigth: height, weight: weight, weightTarget: weightTarget, documentId: user!.uid)
+            session.storeData(firstName: firstName, lastName: lastName, age: age, gender: gender, heigth: height, weight: weight, weightTarget: weightTarget, documentId: user!.uid);
             shouldNavigate = true
         }
     
@@ -92,22 +92,6 @@ struct UserDataInputView: View {
             .border(Color(UIColor.separator))
             .padding(.bottom)
             
-//            Button(action: {
-//                session.storeData(firstName: $firstName, lastName: $lastName, age: $age, gender: $gender, heigth: $height, weight: $weight, weightTarget: $weightTarget, documentId: user?.uid)
-//            })
-//            {
-//                HStack {
-//                    Image(systemName: "arrow")
-//                        .font(.title)
-//                    Text("Next")
-//                        .fontWeight(.semibold)
-//                        .font(.title)
-//                }
-//                .padding()
-//                .foregroundColor(.white)
-//                .background(Color.red)
-//                .cornerRadius(40)
-//            }//Button
             
             Button(action: {
                 storeData()
@@ -125,7 +109,7 @@ struct UserDataInputView: View {
                 .cornerRadius(40)
             }//Button
             
-            NavigationLink(destination: HomePage(), isActive: $shouldNavigate) {
+            NavigationLink(destination: HomePage(viewModel: UserDataViewModel(data: UserData(id: "test", firstName: "test", lastName: "test", gender: "test", height: "test", weight: "test", age: "test", weightTarget: "test"))), isActive: $shouldNavigate) {
                 EmptyView()
             }
 
@@ -134,8 +118,8 @@ struct UserDataInputView: View {
 }///View
 
 
-struct UserDataInputView_Previews: PreviewProvider {
-    static var previews: some View {
-        UserDataInputView()
-    }
-}
+//struct UserDataInputView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        UserDataInputView()
+//    }
+//}

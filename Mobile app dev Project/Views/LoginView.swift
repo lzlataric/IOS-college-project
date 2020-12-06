@@ -49,7 +49,7 @@ struct LoginView: View {
             }
             .padding()
             
-            NavigationLink(destination: HomePage(), isActive: $shouldNavigate) {
+            NavigationLink(destination: HomePage(viewModel: UserDataViewModel(data: UserData(id: "test", firstName: "test", lastName: "test", gender: "test", height: "test", weight: "test", age: "test", weightTarget: "test"))), isActive: $shouldNavigate) {
                 EmptyView()
             }
         }

@@ -9,19 +9,22 @@ import SwiftUI
 import FirebaseAuth
 
 struct HomePage: View {
-    let user = Auth.auth().currentUser
+    let currentUser = Auth.auth().currentUser
+        
+    @ObservedObject var viewModel : UserDataViewModel
 
-    @EnvironmentObject var session: Session
     
-    func getUserInputData(documentId: String) {
-        session.getUserInputData(documentId: user!.uid)
+    func printanje(){
+        print(viewModel.data.firstName)
     }
 
      
     var body: some View {
         VStack {
             Button(action: {
-                getUserInputData(documentId: user!.uid)
+                viewModel.getUserInputData(documentId: currentUser!.uid);
+                printanje()
+                
             }) {
                 HStack {
                     Image(systemName: "arrow")
@@ -34,13 +37,17 @@ struct HomePage: View {
                 .foregroundColor(.white)
                 .background(Color.red)
                 .cornerRadius(40)
+                                
             }//Button
+            //Text("\(user.age), \(user.firstName), \(user.lastName)")
+            Text(viewModel.data.firstName)
+            
         }
     }
 }
 
-struct HomePage_Previews: PreviewProvider {
-    static var previews: some View {
-        HomePage()
-    }
-}
+//struct HomePage_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HomePage(user: UserData)
+//    }
+//}

@@ -46,7 +46,7 @@ struct SignUpView: View {
     
     var body: some View {
         
-        NavigationView {
+       // NavigationView {
             
             VStack {
                 
@@ -80,11 +80,6 @@ struct SignUpView: View {
                         .cornerRadius(40)
                     }
                 
-//                NavigationLink(destination: UserDataInputView().environmentObject(session)) {
-//                Text("Next")
-//                    .fontWeight(.semibold)
-//                    .font(.title)
-//                }
                 
                 NavigationLink(destination: UserDataInputView(), isActive: $shouldNavigate) {
                     EmptyView()
@@ -93,14 +88,14 @@ struct SignUpView: View {
                 
             }//VStack
             
-        }//navigationView
+       // }//navigationView
         
     }//some View
     
 }//View
 
-struct SignUpView_Previews: PreviewProvider {
-    static var previews: some View {
-        SignUpView()
-    }
-}
+//struct SignUpView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SignUpView()
+//    }
+//}
