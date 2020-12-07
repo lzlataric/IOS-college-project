@@ -21,6 +21,9 @@ struct HomePage: View {
      
     var body: some View {
         VStack {
+            
+            Text(viewModel.data.firstName)
+
             Button(action: {
                 viewModel.getUserInputData(documentId: currentUser!.uid);
                 printanje()
@@ -39,12 +42,10 @@ struct HomePage: View {
                 .cornerRadius(40)
                                 
             }//Button
-            //Text("\(user.age), \(user.firstName), \(user.lastName)")
-            Text(viewModel.data.firstName)
             
-        }
-    }
-}
+        }//VStack
+    }//some Viwe
+}//View
 
 //struct HomePage_Previews: PreviewProvider {
 //    static var previews: some View {

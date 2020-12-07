@@ -18,6 +18,7 @@ struct LoginView: View {
     @State var email: String = ""
     @State var password: String = ""
     @State private var shouldNavigate = false
+    let verticalPaddingForForm = 40.0
     
     
     @EnvironmentObject var session: Session
@@ -28,7 +29,7 @@ struct LoginView: View {
                 print("Error")
             } else {
                 let user = Auth.auth().currentUser
-
+                
                 print(user?.email)
                 shouldNavigate = true
                 
@@ -37,31 +38,60 @@ struct LoginView: View {
     }
     
     var body: some View {
-        VStack(spacing: 20) {
-            Text("Sign In")
-            TextField("Email", text: $email)
-                .autocapitalization(.none)
+        ZStack {
+            RadialGradient(gradient: Gradient(colors: [.blue, .red]), center: .center, startRadius: 100, endRadius: 470)
+            VStack(spacing: CGFloat(verticalPaddingForForm)) {
+                
+                Text("Log In")
+                    .font(Font.largeTitle.weight(.heavy))
+                
+                HStack {
+                    Image(systemName: "person")
+                        .foregroundColor(.secondary)
+                    TextField("Email", text: $email)
+                        .autocapitalization(.none)
+                        .foregroundColor(Color.black)
+                }
+                .padding()
+                .background(Color.white)
+                .cornerRadius(10)
+                
+                
+                HStack {
+                    Image(systemName: "key")
+                        .foregroundColor(.secondary)
+                    SecureField("Password", text: $password)
+                        .autocapitalization(.none)
+                        .foregroundColor(Color.black)
+                }
+                .padding()
+                .background(Color.white)
+                .cornerRadius(10)
+                
+                
+                Button(action: logIn) {
+                    Text("Login")
+                    .frame(minWidth: 0, maxWidth: 100, minHeight: 0, maxHeight: 50)
+
+                }
+                .background(Color.red)
+                .foregroundColor(Color.white)
+                .cornerRadius(40)
+                
+                
+                
+                NavigationLink(destination: HomePage(viewModel: UserDataViewModel(data: UserData(id: "test", firstName: "test", lastName: "test", gender: "test", height: "test", weight: "test", age: "test", weightTarget: "test"))), isActive: $shouldNavigate) {
+                    EmptyView()
+                }
+            }//VStack
+            .padding(.horizontal, CGFloat(verticalPaddingForForm))
             
-            
-            SecureField("Password", text: $password)
-            Button(action: logIn) {
-                Text("Login")
-            }
-            .padding()
-            
-            NavigationLink(destination: HomePage(viewModel: UserDataViewModel(data: UserData(id: "test", firstName: "test", lastName: "test", gender: "test", height: "test", weight: "test", age: "test", weightTarget: "test"))), isActive: $shouldNavigate) {
-                EmptyView()
-            }
-        }
-        .padding()
-    }
-    
-    
-    
-    
+        }//ZStack
+        
+    }//some View
     //MARK: Functions
     
-}
+}//View
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {

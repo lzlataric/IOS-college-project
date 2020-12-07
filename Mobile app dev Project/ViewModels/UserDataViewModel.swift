@@ -13,10 +13,9 @@ import FirebaseFirestore
 
 final class UserDataViewModel: ObservableObject {
     @Published private(set) var data: UserData
-    let currentUser = Auth.auth().currentUser
-    
-    
+
     init(data: UserData) {
+        let currentUser = Auth.auth().currentUser
         self.data = data
         getUserInputData(documentId: currentUser?.uid ?? "")
     }
@@ -46,3 +45,4 @@ final class UserDataViewModel: ObservableObject {
     }//func getUserInputData
     
 }//class
+

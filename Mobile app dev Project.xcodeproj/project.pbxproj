@@ -110,9 +110,9 @@
 		54B7C0FD2566A57E0085B100 /* Mobile app dev Project */ = {
 			isa = PBXGroup;
 			children = (
+				54E6B452256923F800076D52 /* Models */,
 				544D804C2576DA4700A213B3 /* ViewModels */,
 				54D7D7EB256AA2A600E60A09 /* Views */,
-				54E6B452256923F800076D52 /* Models */,
 				54E6B4702569419E00076D52 /* LifeCycle */,
 				54B7C1002566A57E0085B100 /* ContentView.swift */,
 				54D7D7DA256A998F00E60A09 /* WelcomePageView.swift */,

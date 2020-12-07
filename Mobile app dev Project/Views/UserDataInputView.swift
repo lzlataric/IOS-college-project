@@ -38,7 +38,6 @@ struct UserDataInputView: View {
             )
             .autocapitalization(.none)
             .disableAutocorrection(true)
-            .border(Color(UIColor.separator))
             
             TextField(
                 "Last Name",
@@ -46,7 +45,6 @@ struct UserDataInputView: View {
             )
             .autocapitalization(.none)
             .disableAutocorrection(true)
-            .border(Color(UIColor.separator))
             
             TextField(
                 "Age",
@@ -54,7 +52,7 @@ struct UserDataInputView: View {
             )
             .autocapitalization(.none)
             .disableAutocorrection(true)
-            .border(Color(UIColor.separator))
+            .padding(.bottom)
             
             TextField(
                 "Gender",
@@ -62,7 +60,6 @@ struct UserDataInputView: View {
             )
             .autocapitalization(.none)
             .disableAutocorrection(true)
-            .border(Color(UIColor.separator))
             .padding(.bottom)
             
             TextField(
@@ -71,7 +68,6 @@ struct UserDataInputView: View {
             )
             .autocapitalization(.none)
             .disableAutocorrection(true)
-            .border(Color(UIColor.separator))
             .padding(.bottom)
             
             TextField(
@@ -80,7 +76,6 @@ struct UserDataInputView: View {
             )
             .autocapitalization(.none)
             .disableAutocorrection(true)
-            .border(Color(UIColor.separator))
             .padding(.bottom)
             
             TextField(
@@ -89,7 +84,6 @@ struct UserDataInputView: View {
             )
             .autocapitalization(.none)
             .disableAutocorrection(true)
-            .border(Color(UIColor.separator))
             .padding(.bottom)
             
             

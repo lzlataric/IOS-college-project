@@ -15,8 +15,9 @@ struct SignUpView: View {
     @State var password: String = ""
     @State var name: String = ""
     @State var lastname: String = ""
-    //let user = Auth.auth().currentUser
     @State private var shouldNavigate = false
+    let verticalPaddingForForm = 40.0
+
     
     @EnvironmentObject var session: Session
     
@@ -47,24 +48,36 @@ struct SignUpView: View {
     var body: some View {
         
        // NavigationView {
-            
+        
+        ZStack {
+            RadialGradient(gradient: Gradient(colors: [.blue, .red]), center: .center, startRadius: 100, endRadius: 470)
             VStack {
+                Text("Sign In")
+                    .font(Font.largeTitle.weight(.heavy))
                 
-                TextField(
-                    "Email address",
-                    text: $email
-                )
-                .autocapitalization(.none)
-                .disableAutocorrection(true)
-                .border(Color(UIColor.separator))
+                HStack {
+                    Image(systemName: "person")
+                        .foregroundColor(.secondary)
+                    TextField("Email", text: $email)
+                        .autocapitalization(.none)
+                        .foregroundColor(Color.black)
+                }
+                .padding()
+                .background(Color.white)
+                .cornerRadius(10)
                 
-                SecureField(
-                    "Password",
-                    text: $password
-                )
-                .autocapitalization(.none)
-                .disableAutocorrection(true)
-                .border(Color(UIColor.separator))
+                
+                HStack {
+                    Image(systemName: "key")
+                        .foregroundColor(.secondary)
+                    SecureField("Password", text: $password)
+                        .autocapitalization(.none)
+                        .foregroundColor(Color.black)
+                }
+                .padding()
+                .background(Color.white)
+                .cornerRadius(10)
+                
                 
                     Button(action: signUp) {
                         HStack {
@@ -87,8 +100,12 @@ struct SignUpView: View {
                 
                 
             }//VStack
+            .padding(.horizontal, CGFloat(verticalPaddingForForm))
+
             
-       // }//navigationView
+        }//ZStack
+            
+        //}//navigationView
         
     }//some View
     
