@@ -11,11 +11,11 @@ struct Log: Identifiable {
 //    var foodData : FoodData
 //    // let id = UUID()
     let id : String
-//    let currentDate = Date()
-//    var breakfast : [foodData]
-//    var lunch = [FoodData]
-//    var dinner : [FoodData]
-//    var sleep : Double
-//    var exercice : [ExerciseData]
-//    var weight : Double
+    let currentDate = Date()
+    var breakfast : [FoodData]
+    var lunch = [FoodData].self
+    var dinner : [FoodData]
+    var sleep : Double
+    var exercice : [ExerciseData]
+    var weight : Double
 }

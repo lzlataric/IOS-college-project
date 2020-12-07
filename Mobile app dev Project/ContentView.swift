@@ -16,6 +16,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
+            
             WelcomePageView().environmentObject(session)
         }
     }

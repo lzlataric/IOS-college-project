@@ -44,9 +44,11 @@ struct LoginView: View {
                 
                 Text("Log In")
                     .font(Font.largeTitle.weight(.heavy))
+                    .foregroundColor(Color(.white))
+
                 
                 HStack {
-                    Image(systemName: "person")
+                    Image(systemName: "person.fill")
                         .foregroundColor(.secondary)
                     TextField("Email", text: $email)
                         .autocapitalization(.none)
@@ -87,6 +89,7 @@ struct LoginView: View {
             .padding(.horizontal, CGFloat(verticalPaddingForForm))
             
         }//ZStack
+        .edgesIgnoringSafeArea(.all)
         
     }//some View
     //MARK: Functions
@@ -95,6 +98,8 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        Group {
+            LoginView()
+        }
     }
 }

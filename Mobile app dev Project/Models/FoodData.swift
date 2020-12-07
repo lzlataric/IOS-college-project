@@ -8,12 +8,12 @@
 import Foundation
 
 
-struct FooDData: Identifiable {
-    var id: ObjectIdentifier
+struct FoodData: Identifiable, Codable, Equatable {
     
-    let foodId = UUID()
-    let name: String
-    let calories: Int
-    let carbs: Int
-    let protein: Int
+    var id = UUID()
+    var name: String
+    var cal: Double
+    var carbs: Double
+    var fat: Double
+    var protein: Double
 }

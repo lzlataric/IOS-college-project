@@ -23,27 +23,17 @@ struct HomePage: View {
         VStack {
             
             Text(viewModel.data.firstName)
-
-            Button(action: {
-                viewModel.getUserInputData(documentId: currentUser!.uid);
-                printanje()
-                
-            }) {
-                HStack {
-                    Image(systemName: "arrow")
-                        .font(.title)
-                    Text("Next")
-                        .fontWeight(.semibold)
-                        .font(.title)
-                }
-                .padding()
-                .foregroundColor(.white)
-                .background(Color.red)
-                .cornerRadius(40)
                                 
-            }//Button
+            
+            NavigationLink(destination:FoodView(viewModel: FoodDataViewModel(foodData: FoodData(name: "test", cal: 0, carbs: 0, fat: 0, protein: 0)))) {
+                EmptyView()
+                Text("Pick food")
+            }
             
         }//VStack
+        .onAppear{
+            viewModel.getUserInputData()
+        }
     }//some Viwe
 }//View
 
