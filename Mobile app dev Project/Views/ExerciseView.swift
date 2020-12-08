@@ -1,49 +1,45 @@
 //
-//  FoodView.swift
+//  ExerciseView.swift
 //  Mobile app dev Project
 //
-//  Created by Dominik Bosnjak on 07.12.2020..
+//  Created by Dominik Bosnjak on 08.12.2020..
 //
 
 import SwiftUI
 
-struct FoodView: View {
-    @ObservedObject var foods = FoodDataViewModel(foodData: FoodData(name: "test", cal: 0, carbs: 0, fat: 0, protein: 0))
-    @ObservedObject var viewModel : FoodDataViewModel
+struct ExerciseView: View {
+    @ObservedObject var exercises = ExerciseDataViewModel()
+    @ObservedObject var viewModel : ExerciseDataViewModel
     @State var search: String = ""
     
-    func getData(search: String) -> [FoodData] {
+    func getData(search: String) -> [ExerciseData] {
             
-            let filtered = foods.data.filter { (obj: FoodData) in
-                obj.name.contains(search)
+            let filtered = exercises.data.filter { (obj: ExerciseData) in
+                obj.exerciseName.contains(search)
             }
             return filtered
         }
     
+    
     var body: some View {
         TextField("Enter a word", text: $search)
-                //.autocapitalizationType
-                //.onChange(of: Equatable, perform: <#T##(Equatable) -> Void#>)
                 
-                Button(action: {
-                    getData(search: search)
-                }) {
-                Text("Submit")
-                }
-
                 VStack {
                     if (search == "") {
-                        List(foods.data) { data in
+                        List(exercises.data) { data in
                                 VStack(alignment: .leading) {
                                     // 3.
-                                    Text(data.name)
+                                    HStack() {
+                                        Text(data.exerciseName)
+                                        Text(String(data.caloriesBurned))
+                                    }
                                 }
                         }
                     } else {
                         List(getData(search: search)) { data in
                                 VStack(alignment: .leading) {
                                     // 3.
-                                    Text(data.name)
+                                    Text(data.exerciseName)
                                 }
                             
                             
@@ -55,3 +51,8 @@ struct FoodView: View {
     }
 }
 
+//struct ExerciseView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ExerciseView()
+//    }
+//}

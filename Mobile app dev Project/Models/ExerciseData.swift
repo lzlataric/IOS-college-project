@@ -7,10 +7,9 @@
 
 import Foundation
 
-struct ExerciseData: Identifiable {
-    var id: ObjectIdentifier
+struct ExerciseData: Identifiable, Codable {
     
-    let exerciseId = UUID()
-    let exerciseName: String
-    let caloriesBurned: Int
+    var id = UUID()
+    var exerciseName: String
+    var caloriesBurned: Int
 }

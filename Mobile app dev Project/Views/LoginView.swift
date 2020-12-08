@@ -15,8 +15,8 @@ import FirebaseDatabase
 struct LoginView: View {
     
     //MARK: Properties
-    @State var email: String = ""
-    @State var password: String = ""
+    @State var email: String = "dominik.bosnjak94@gmail.com"
+    @State var password: String = "test1234"
     @State private var shouldNavigate = false
     let verticalPaddingForForm = 40.0
     

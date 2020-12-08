@@ -12,14 +12,10 @@ struct HomePage: View {
     let currentUser = Auth.auth().currentUser
         
     @ObservedObject var viewModel : UserDataViewModel
+    @ObservedObject var logViewModel = LogViewModel()
     let verticalPaddingForForm = 40.0
     var currentDate = "Fri, 9 Oct"
-
-
-    
-    func printanje(){
-        print(viewModel.data.firstName)
-    }
+    @State private var shouldNavigate = true
 
      
     var body: some View {
@@ -27,8 +23,8 @@ struct HomePage: View {
         ZStack {
             RadialGradient(gradient: Gradient(colors: [.blue, .red]), center: .center, startRadius: 100, endRadius: 470)
             VStack(spacing: CGFloat(verticalPaddingForForm)) {
-               
                 HStack {
+                    
                     Text("<")
                         .padding(.leading)
                     Text(currentDate)
@@ -131,8 +127,20 @@ struct HomePage: View {
                                 Text("+")
                                     .font(.system(size: 20))
                             }//Button
+                            
+                            NavigationLink(destination:FoodView(viewModel: FoodDataViewModel(foodData: FoodData(name: "test", cal: 0, carbs: 0, fat: 0, protein: 0)))) {
+                                EmptyView()
+                                Text("+")
+                                    .foregroundColor(.white)
+                                    .padding()
+                            }//NavigationLink
+                            .background(Color(.black))
+                            .cornerRadius(15)
+                            
                             Text("350 cal")
                                 .padding()
+                            
+                            
                         }
                         
                     }//HStack
@@ -143,15 +151,7 @@ struct HomePage: View {
 
                     
                         
-                        NavigationLink(destination:FoodView(viewModel: FoodDataViewModel(foodData: FoodData(name: "test", cal: 0, carbs: 0, fat: 0, protein: 0)))) {
-                            EmptyView()
-                            Text("Pick food")
-                                .foregroundColor(.white)
-                                .font(.title)
-                                .padding()
-                        }//NavigationView
-                        .background(Color(.black))
-                        .cornerRadius(15)
+                        
                         
                    }//VStack
                     .onAppear{
@@ -159,6 +159,28 @@ struct HomePage: View {
                     }
                     .padding(.horizontal, CGFloat(verticalPaddingForForm))
                             
+                Button(action: {
+                    
+                }) {
+                    Text("+")
+                        .font(.system(size: 20))
+                }//Button
+                
+                NavigationLink(destination:ExerciseView(viewModel: ExerciseDataViewModel())) {
+                    EmptyView()
+                    Text("ALO E")
+                        .foregroundColor(.white)
+                        .padding()
+                }//NavigationLink
+                .background(Color(.black))
+                .cornerRadius(15)
+                
+                List(logViewModel.data) { data in
+                        VStack(alignment: .leading) {
+                            // 3.
+                            Text(data.userId)
+                        }}
+                
             }//VStack
            
 
