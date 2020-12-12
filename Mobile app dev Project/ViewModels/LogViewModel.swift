@@ -19,7 +19,6 @@ final class LogViewModel: ObservableObject {
     
     
     init() {
-       // getAllLogs()
     }
     
     func getAllLogs() {
