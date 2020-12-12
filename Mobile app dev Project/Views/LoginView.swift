@@ -34,7 +34,6 @@ struct LoginView: View {
                 let user = Auth.auth().currentUser
                 print(user?.uid)
                 shouldNavigate = true
-                
             }
         }
     }

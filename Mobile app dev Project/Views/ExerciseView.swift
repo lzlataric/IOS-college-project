@@ -12,42 +12,70 @@ struct ExerciseView: View {
     @ObservedObject var viewModel : ExerciseDataViewModel
     @State var search: String = ""
     
+    @State var caloriesBurned = 0
+    @State var exerciseName = ""
+    @State var shouldNavigate = false
+    //    @State var isSelected : Color = .white
+    
+    
+    @Binding var exercise : [ExerciseData]
+    
     func getData(search: String) -> [ExerciseData] {
-            
-            let filtered = exercises.data.filter { (obj: ExerciseData) in
-                obj.exerciseName.contains(search)
-            }
-            return filtered
+        
+        let filtered = exercises.data.filter { (obj: ExerciseData) in
+            obj.exerciseName.contains(search)
         }
+        return filtered
+    }
     
     
     var body: some View {
         TextField("Enter a word", text: $search)
-                
-                VStack {
-                    if (search == "") {
-                        List(exercises.data) { data in
-                                VStack(alignment: .leading) {
-                                    // 3.
-                                    HStack() {
-                                        Text(data.exerciseName)
-                                        Text(String(data.caloriesBurned))
-                                    }
-                                }
-                        }
-                    } else {
-                        List(getData(search: search)) { data in
-                                VStack(alignment: .leading) {
-                                    // 3.
-                                    Text(data.exerciseName)
+        
+        VStack {
+            if (search == "") {
+                List(exercises.data) { data in
+                    //caloriesBurned = data.caloriesBurned
+                    VStack(alignment: .leading) {
+                        
+                        HStack() {
+                            Text(data.exerciseName)
+                                .onTapGesture {
+                                    self.caloriesBurned = data.caloriesBurned
+                                    self.exerciseName = data.exerciseName
+                                    self.shouldNavigate = true
+                                    print(self.caloriesBurned)
                                 }
                             
                             
+                            
+                            //   Text(String(data.caloriesBurned))
+                            
                         }
+                        //foregroundColor(isSelected)
+                        
+                        
+                    }
+                    
+                }
+                NavigationLink(destination: ExerciseDetailView(caloriesBurned: $caloriesBurned, exerciseName: $exerciseName, exercise: $exercise), isActive: $shouldNavigate) {
+                    EmptyView()
+                }
+            } else {
+                List(getData(search: search)) { data in
+                    VStack(alignment: .leading) {
+                        
+                        Text(data.exerciseName)
+                        Text(String(data.caloriesBurned))
+                        
                     }
                     
                     
                 }
+            }
+            
+            
+        }
     }
 }
 

@@ -38,7 +38,7 @@ final class LogViewModel: ObservableObject {
                         do {
                             let log = try FirebaseDecoder().decode(Log.self, from: response)
                             
-                            self.dateFormatter.dateFormat = "yyyy-MM-dd"
+                            self.dateFormatter.dateFormat = "yyyy-MM-dd" 
                             let actualDate = self.dateFormatter.string(from: log.actualDate)
                             let todaysDate = self.dateFormatter.string(from: Date())
                             print(actualDate)
@@ -49,7 +49,7 @@ final class LogViewModel: ObservableObject {
                             if(actualDate == todaysDate){
                                 DispatchQueue.main.async {
                                     self.data.append(log)
-                                    print(self.data)
+                                    //print(self.data)
                                 }
                                 
                             }
@@ -74,13 +74,13 @@ final class LogViewModel: ObservableObject {
         
         Firestore.firestore()
             .collection("Log")
-            .document("4")
+            .document("6")
             .setData([
                 "userId": "2",
                 "currentDate": Timestamp(date: Date()),
                 "breakfast": [
                     [
-                        "name": "Kruh",
+                        "name": "povrce",
                         "cal" :  5.0,
                         "carbs" : 5.0,
                         "fat" : 5.0,

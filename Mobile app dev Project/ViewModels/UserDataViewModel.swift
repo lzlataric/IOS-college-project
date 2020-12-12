@@ -21,12 +21,8 @@ final class UserDataViewModel: ObservableObject {
     }
     
     func getUserInputData() {
-       guard let currentUser = Auth.auth().currentUser
-       else {
-        return
-       }
+       guard let currentUser = Auth.auth().currentUser else {return}
 
-        
         Firestore.firestore()
             .collection("User_Data")
             .document(currentUser.uid)

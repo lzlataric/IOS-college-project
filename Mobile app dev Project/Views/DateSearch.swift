@@ -9,22 +9,18 @@ import SwiftUI
 import FirebaseAuth
 import SwiftUICharts
 
-struct HomePage: View {
+struct DateSearch: View {
     @ObservedObject var viewModel : UserDataViewModel
     @ObservedObject var logViewModel : LogViewModel
 
-    @State var sleep : Double = 0
-    @State var weight: Double = 0
-    @State var userId : String = ""
-    @State var currentDate = Date()
-    // var breakfast: [FoodData] = [FoodData(name: "1", cal: 0, carbs: 0, fat: 0, protein: 0)]
-    @State var breakfast: [FoodData] = []
-    // var lunch: [FoodData] = [FoodData(name: "2", cal: 0, carbs: 0, fat: 0, protein: 0)]
-    @State var lunch: [FoodData] = []
-    //var dinner: [FoodData] = [FoodData(name: "3", cal: 0, carbs: 0, fat: 0, protein: 0)]
-    @State var dinner: [FoodData] = []
-    // var exercise: [ExerciseData] = [ExerciseData(exerciseName: "4", caloriesBurned: 0)]
-    @State var exercise: [ExerciseData] = []
+    var sleep : Double = 0
+    var weight: Double = 0
+    var userId : String = ""
+    var currentDate = Date()
+    var breakfast: [FoodData] = [FoodData(name: "1", cal: 0, carbs: 0, fat: 0, protein: 0)]
+    var lunch: [FoodData] = [FoodData(name: "2", cal: 0, carbs: 0, fat: 0, protein: 0)]
+    var dinner: [FoodData] = [FoodData(name: "3", cal: 0, carbs: 0, fat: 0, protein: 0)]
+    var exercise: [ExerciseData] = [ExerciseData(exerciseName: "4", caloriesBurned: 0)]
     
     var todaysDate = "Fri, 9 Oct"
     @State private var shouldNavigate = true
@@ -154,13 +150,13 @@ struct HomePage: View {
                                         Spacer()
                                             .frame(width: 200)
                                         
-                                        NavigationLink(destination:FoodView(viewModel: FoodDataViewModel(foodData: FoodData(name: "test", cal: 0, carbs: 0, fat: 0, protein: 0)), breakfast: $breakfast)) {
-                                            EmptyView()
-                                            Text("+")
-                                                .foregroundColor(.white)
-                                        }//NavigationLink
-                                        .background(Color(.black))
-                                        .padding()
+//                                        NavigationLink(destination:FoodView(viewModel: FoodDataViewModel(foodData: FoodData(name: "test", cal: 0, carbs: 0, fat: 0, protein: 0)))) {
+//                                            EmptyView()
+//                                            Text("+")
+//                                                .foregroundColor(.white)
+//                                        }//NavigationLink
+//                                        .background(Color(.black))
+//                                        .padding()
                                         
                                     }//HStack
                                     .font(.system(size: 12))
@@ -172,22 +168,25 @@ struct HomePage: View {
                                    // Text(logViewModel.data.first?.breakfast.first?.name ?? "no data")
                                     
                                     VStack {
-                                        ForEach(breakfast) { food in
-                                            HStack {
-                                                VStack {
-                                                    Text(food.name )
-                                                }//VStack
-                                                .frame(alignment: .leading)
-                                                Spacer()
-                                                    .frame(width: 30)
-                                                VStack {
-                                                    Text(String(food.cal) )
-                                                }//VStack
-                                                .frame(alignment: .leading)
+                                        ForEach(logViewModel.data) { data in
+                                            ForEach(data.breakfast) { breakfast in
+                                            //Text(String(describing: data.actualDate))
+                                                HStack {
+                                                    VStack {
+                                                        Text(breakfast.name)
+                                                    }//VStack
+                                                    .frame(alignment: .leading)
+                                                    Spacer()
+                                                        .frame(width: 30)
+                                                    VStack {
+                                                        Text(String(breakfast.cal))
+                                                    }//VStack
+                                                    .frame(alignment: .leading)
+
+                                                }//HStack
                                                 
-                                            }//HStack
+                                            }
                                         }
-                                        
                                     }//VStack
                                     .scaledToFit()
                                     .padding(.bottom)
@@ -211,41 +210,30 @@ struct HomePage: View {
                                         Text("Lunch")
                                             .padding()
                                         
-                                        NavigationLink(destination:FoodView(viewModel: FoodDataViewModel(foodData: FoodData(name: "test", cal: 0, carbs: 0, fat: 0, protein: 0)), breakfast: $lunch)) {
-                                            EmptyView()
-                                            Text("+")
-                                                .foregroundColor(.white)
-                                        }//NavigationLink
-                                        .background(Color(.black))
-                                        .cornerRadius(15)
-                                        .padding()
+//                                        NavigationLink(destination:FoodView(viewModel: FoodDataViewModel(foodData: FoodData(name: "test", cal: 0, carbs: 0, fat: 0, protein: 0)))) {
+//                                            EmptyView()
+//                                            Text("+")
+//                                                .foregroundColor(.white)
+//                                        }//NavigationLink
+//                                        .background(Color(.black))
+//                                        .cornerRadius(15)
+//                                        .padding()
                                         
                                     }//HStack
                                     .font(.system(size: 12))
                                     
                                     Spacer()
                                     
-                                        VStack {
-                                            ForEach(lunch) { food in
-                                                HStack {
-                                                    VStack {
-                                                        Text(food.name )
-                                                    }//VStack
-                                                    .frame(alignment: .leading)
-                                                    Spacer()
-                                                        .frame(width: 30)
-                                                    VStack {
-                                                        Text(String(food.cal) )
-                                                    }//VStack
-                                                    .frame(alignment: .leading)
-                                                    
-                                                }//HStack
-                                            }
-                                            
-                                        }//VStack
-                                        .scaledToFit()
-                                        .padding(.bottom)
-                                        .frame(alignment: .leading)                                    
+                                    HStack {
+                                        Text(self.lunch[0].name)
+                                        
+                                        
+                                        
+                                        
+                                        Text(String(self.lunch[0].cal))
+                                            .padding()
+                                    }//HStack
+                                    
                                     
                                     
                                 }//VStack
@@ -266,41 +254,29 @@ struct HomePage: View {
                                         Text("Dinner")
                                             .padding()
                                         
-                                        NavigationLink(destination:FoodView(viewModel: FoodDataViewModel(foodData: FoodData(name: "test", cal: 0, carbs: 0, fat: 0, protein: 0)), breakfast: $dinner)) {
-                                            EmptyView()
-                                            Text("+")
-                                                .foregroundColor(.white)
-                                        }//NavigationLink
-                                        .background(Color(.black))
-                                        .cornerRadius(15)
-                                        .padding()
+//                                        NavigationLink(destination:FoodView(viewModel: FoodDataViewModel(foodData: FoodData(name: "test", cal: 0, carbs: 0, fat: 0, protein: 0)))) {
+//                                            EmptyView()
+//                                            Text("+")
+//                                                .foregroundColor(.white)
+//                                        }//NavigationLink
+//                                        .background(Color(.black))
+//                                        .cornerRadius(15)
+//                                        .padding()
                                         
                                     }//HStack
                                     .font(.system(size: 12))
                                     
                                     Spacer()
                                     
-                                    VStack {
-                                        ForEach(dinner) { food in
-                                            HStack {
-                                                VStack {
-                                                    Text(food.name )
-                                                }//VStack
-                                                .frame(alignment: .leading)
-                                                Spacer()
-                                                    .frame(width: 30)
-                                                VStack {
-                                                    Text(String(food.cal) )
-                                                }//VStack
-                                                .frame(alignment: .leading)
-                                                
-                                            }//HStack
-                                        }
+                                    HStack {
+                                        Text(self.dinner[0].name)
                                         
-                                    }//VStack
-                                    .scaledToFit()
-                                    .padding(.bottom)
-                                    .frame(alignment: .leading)
+                                        
+                                        
+                                        
+                                        Text(String(self.dinner[0].cal))
+                                            .padding()
+                                    }//HStack
                                     
                                     
                                     
@@ -322,41 +298,29 @@ struct HomePage: View {
                                         Text("Exercise")
                                             .padding()
                                         
-                                        NavigationLink(destination:ExerciseView(viewModel: ExerciseDataViewModel(), exercise: $exercise)) {
-                                            EmptyView()
-                                            Text("+")
-                                                .foregroundColor(.white)
-                                        }//NavigationLink
-                                        .background(Color(.black))
-                                        .cornerRadius(15)
-                                        .padding()
+//                                        NavigationLink(destination:ExerciseView(viewModel: ExerciseDataViewModel())) {
+//                                            EmptyView()
+//                                            Text("+")
+//                                                .foregroundColor(.white)
+//                                        }//NavigationLink
+//                                        .background(Color(.black))
+//                                        .cornerRadius(15)
+//                                        .padding()
                                         
                                     }//HStack
                                     .font(.system(size: 12))
                                     
                                     Spacer()
                                     
-                                    VStack {
-                                        ForEach(exercise) { exercise in
-                                            HStack {
-                                                VStack {
-                                                    Text(exercise.exerciseName )
-                                                }//VStack
-                                                .frame(alignment: .leading)
-                                                Spacer()
-                                                    .frame(width: 30)
-                                                VStack {
-                                                    Text(String(exercise.caloriesBurned))
-                                                }//VStack
-                                                .frame(alignment: .leading)
-                                                
-                                            }//HStack
-                                        }
+                                    HStack {
+                                        Text(self.exercise[0].exerciseName)
                                         
-                                    }//VStack
-                                    .scaledToFit()
-                                    .padding(.bottom)
-                                    .frame(alignment: .leading)
+                                        
+                                        
+                                        
+                                        Text(String(self.exercise[0].caloriesBurned))
+                                            .padding()
+                                    }//HStack
                                     
                                 }//VStack
                                 
@@ -391,13 +355,14 @@ struct HomePage: View {
         .edgesIgnoringSafeArea(.all)
         .onAppear {
             viewModel.getUserInputData()
+            logViewModel.getAllLogs()
         }
         
     }//some View
     
 }//View
 
-struct HomePage_Previews: PreviewProvider {
+struct DateSearch_Previews: PreviewProvider {
     static var previews: some View {
         HomePage(viewModel: UserDataViewModel(data: UserData(id: "0", firstName: "test", lastName: "test", gender: "test", height: "test", weight: "test", age: "test", weightTarget: "test")), logViewModel: LogViewModel())
     }
@@ -408,4 +373,48 @@ struct HomePage_Previews: PreviewProvider {
 
 
 
+
+//    List {
+//                        ForEach(logViewModel.data) { data in
+//
+//                            Text(data.breakfast[0].name)
+//
+//                        }
+//                    }
+//                   Text(logViewModel.data[0].breakfast[0].name)
+
+
+
+//                List(logViewModel.data) { data in
+//                        VStack(alignment: .leading) {
+//                            // 3.
+//                            Text(data.userId)
+//                        }}
+//
+//            }//VStack
+//            .padding(.horizontal, CGFloat(verticalPaddingForForm))
+
+
+//                NavigationLink(destination:ExerciseView(viewModel: ExerciseDataViewModel())) {
+//                    EmptyView()
+//                    Text("ALO E")
+//                        .foregroundColor(.white)
+//                        .padding()
+//                }//NavigationLink
+//                .background(Color(.black))
+//                .cornerRadius(15)
+
+
+
+//Button(action: {
+//                        logViewModel.storeLogData()
+//
+//                }) {
+//                    Text("Store Log")
+//                        .frame(minWidth: 0, maxWidth: 100, minHeight: 0, maxHeight: 50)
+//
+//                }
+//                .background(Color.black)
+//                .foregroundColor(Color.white)
+//                .cornerRadius(40)
 
