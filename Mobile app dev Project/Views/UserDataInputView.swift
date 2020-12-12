@@ -131,9 +131,13 @@ struct UserDataInputView: View {
                 .foregroundColor(Color.white)
                 .cornerRadius(40)
                 
-                NavigationLink(destination: HomePage(viewModel: UserDataViewModel(data: UserData(id: "test", firstName: "test", lastName: "test", gender: "test", height: "test", weight: "test", age: "test", weightTarget: "test"))), isActive: $shouldNavigate) {
+                NavigationLink(destination: HomePage(viewModel: UserDataViewModel(data: UserData(id: "test", firstName: "test", lastName: "test", gender: "test", height: "test", weight: "test", age: "test", weightTarget: "test")), logViewModel: LogViewModel()), isActive: $shouldNavigate) {
                     EmptyView()
                 }
+                .navigationBarTitle("")
+                .navigationBarHidden(true)
+                .navigationBarBackButtonHidden(true)
+
                 
             }//VStack
             .padding(.horizontal, CGFloat(verticalPaddingForForm))

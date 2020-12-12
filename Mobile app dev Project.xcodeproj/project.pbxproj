@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,6 +12,8 @@
 		541934E1257FE5CF00F0921C /* ExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541934E0257FE5CF00F0921C /* ExerciseView.swift */; };
 		541934E4257FF5A000F0921C /* LogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541934E3257FF5A000F0921C /* LogViewModel.swift */; };
 		541DD2202573CA4300290E80 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541DD21F2573CA4300290E80 /* HomePage.swift */; };
+		542A53462582AD8E00E8E306 /* CodableFirebase in Frameworks */ = {isa = PBXBuildFile; productRef = 542A53452582AD8E00E8E306 /* CodableFirebase */; };
+		542A534A2583F63200E8E306 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 542A53492583F63200E8E306 /* SwiftUICharts */; };
 		544D804E2576DA7B00A213B3 /* UserDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544D804D2576DA7B00A213B3 /* UserDataViewModel.swift */; };
 		5452D470256D864A002EEF9B /* UserDataInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5452D46F256D864A002EEF9B /* UserDataInputView.swift */; };
 		547533DE257E675400829524 /* FoodDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547533DD257E675300829524 /* FoodDataViewModel.swift */; };
@@ -67,6 +69,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				542A534A2583F63200E8E306 /* SwiftUICharts in Frameworks */,
+				542A53462582AD8E00E8E306 /* CodableFirebase in Frameworks */,
 				1A6D32D21F988A182CC64867 /* Pods_Mobile_app_dev_Project.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -197,6 +201,10 @@
 			dependencies = (
 			);
 			name = "Mobile app dev Project";
+			packageProductDependencies = (
+				542A53452582AD8E00E8E306 /* CodableFirebase */,
+				542A53492583F63200E8E306 /* SwiftUICharts */,
+			);
 			productName = "Mobile app dev Project";
 			productReference = 54B7C0FB2566A57E0085B100 /* Mobile app dev Project.app */;
 			productType = "com.apple.product-type.application";
@@ -224,6 +232,10 @@
 				Base,
 			);
 			mainGroup = 54B7C0F22566A57D0085B100;
+			packageReferences = (
+				542A53442582AD8E00E8E306 /* XCRemoteSwiftPackageReference "CodableFirebase" */,
+				542A53482583F63200E8E306 /* XCRemoteSwiftPackageReference "ChartView" */,
+			);
 			productRefGroup = 54B7C0FC2566A57E0085B100 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -502,6 +514,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		542A53442582AD8E00E8E306 /* XCRemoteSwiftPackageReference "CodableFirebase" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alickbass/CodableFirebase";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.2;
+			};
+		};
+		542A53482583F63200E8E306 /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		542A53452582AD8E00E8E306 /* CodableFirebase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 542A53442582AD8E00E8E306 /* XCRemoteSwiftPackageReference "CodableFirebase" */;
+			productName = CodableFirebase;
+		};
+		542A53492583F63200E8E306 /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 542A53482583F63200E8E306 /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 54B7C0F32566A57D0085B100 /* Project object */;
 }

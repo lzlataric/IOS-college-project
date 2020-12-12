@@ -12,4 +12,9 @@ struct ExerciseData: Identifiable, Codable {
     var id = UUID()
     var exerciseName: String
     var caloriesBurned: Int
+    
+    enum CodingKeys: CodingKey{
+        case exerciseName
+        case caloriesBurned
+    }
 }

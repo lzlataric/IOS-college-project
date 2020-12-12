@@ -14,12 +14,15 @@ import FirebaseDatabase
 
 struct LoginView: View {
     
+    //@ObservedObject var logViewModel = LogViewModel()
+    
     //MARK: Properties
     @State var email: String = "dominik.bosnjak94@gmail.com"
     @State var password: String = "test1234"
     @State private var shouldNavigate = false
     let verticalPaddingForForm = 40.0
     
+    @ObservedObject private var logViewModel = LogViewModel()
     
     @EnvironmentObject var session: Session
     
@@ -29,8 +32,7 @@ struct LoginView: View {
                 print("Error")
             } else {
                 let user = Auth.auth().currentUser
-                
-                print(user?.email)
+                print(user?.uid)
                 shouldNavigate = true
                 
             }
@@ -80,14 +82,19 @@ struct LoginView: View {
                 .foregroundColor(Color.white)
                 .cornerRadius(40)
                 
-                
-                
-                NavigationLink(destination: HomePage(viewModel: UserDataViewModel(data: UserData(id: "test", firstName: "test", lastName: "test", gender: "test", height: "test", weight: "test", age: "test", weightTarget: "test"))), isActive: $shouldNavigate) {
+                NavigationLink(destination: HomePage(viewModel: UserDataViewModel(data: UserData(id: "test", firstName: "test", lastName: "test", gender: "test", height: "test", weight: "test", age: "test", weightTarget: "test")), logViewModel: logViewModel), isActive: $shouldNavigate) {
                     EmptyView()
                 }
+                .navigationBarTitle("")
+                .navigationBarHidden(true)
+                .navigationBarBackButtonHidden(true)
+                
+
             }//VStack
             .padding(.horizontal, CGFloat(verticalPaddingForForm))
-            
+//            .onDisappear{
+//                logViewModel.getAllLogs()
+//            }
         }//ZStack
         .edgesIgnoringSafeArea(.all)
         
@@ -96,10 +103,10 @@ struct LoginView: View {
     
 }//View
 
-struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            LoginView()
-        }
-    }
-}
+//struct LoginView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Group {
+//            LoginView()
+//        }
+//    }
+//}

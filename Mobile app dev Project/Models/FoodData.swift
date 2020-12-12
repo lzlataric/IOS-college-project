@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct FoodData: Identifiable, Codable, Equatable {
+struct FoodData: Identifiable, Codable, Equatable, Hashable {
     
     var id = UUID()
     var name: String
@@ -16,4 +16,12 @@ struct FoodData: Identifiable, Codable, Equatable {
     var carbs: Double
     var fat: Double
     var protein: Double
+    
+    enum CodingKeys: CodingKey{
+        case name
+        case cal
+        case carbs
+        case fat
+        case protein
+    }
 }

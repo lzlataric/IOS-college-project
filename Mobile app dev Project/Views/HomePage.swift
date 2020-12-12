@@ -7,203 +7,442 @@
 
 import SwiftUI
 import FirebaseAuth
+import SwiftUICharts
 
 struct HomePage: View {
-    let currentUser = Auth.auth().currentUser
-        
+    
+    var sleep : Double = 0
+    var weight: Double = 0
+    var userId : String = ""
+    var currentDate = Date()
+    var breakfast: [FoodData] = [FoodData(name: "1", cal: 0, carbs: 0, fat: 0, protein: 0)]
+    var lunch: [FoodData] = [FoodData(name: "2", cal: 0, carbs: 0, fat: 0, protein: 0)]
+    var dinner: [FoodData] = [FoodData(name: "3", cal: 0, carbs: 0, fat: 0, protein: 0)]
+    var exercise: [ExerciseData] = [ExerciseData(exerciseName: "4", caloriesBurned: 0)]
     @ObservedObject var viewModel : UserDataViewModel
-    @ObservedObject var logViewModel = LogViewModel()
-    let verticalPaddingForForm = 40.0
-    var currentDate = "Fri, 9 Oct"
+    //@EnvironmentObject var logViewModel : LogViewModel
+    @ObservedObject var logViewModel : LogViewModel
+    
+    var todaysDate = "Fri, 9 Oct"
     @State private var shouldNavigate = true
-
-     
+    
+    
+    let verticalPaddingForForm = 40.0
+    
+    let chartStyle = ChartStyle(backgroundColor: Color.black, accentColor: Colors.OrangeStart, secondGradientColor: Colors.OrangeEnd, textColor: Color.white, legendTextColor: Color.white, dropShadowColor: .black )
+    
+    
+    
+    
+    
+    
     var body: some View {
-        
-        ZStack {
-            RadialGradient(gradient: Gradient(colors: [.blue, .red]), center: .center, startRadius: 100, endRadius: 470)
-            VStack(spacing: CGFloat(verticalPaddingForForm)) {
-                HStack {
                     
-                    Text("<")
-                        .padding(.leading)
-                    Text(currentDate)
-                        .padding()
-                    Text(">")
-                    Spacer()
-                        .scaledToFit()
-                    Text(viewModel.data.firstName)
-                    Image(systemName: "person.fill")
-                        .padding()
-                }//HStack
-                .frame(width: 380, height: 60, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                .background(Color(.black))
-                .edgesIgnoringSafeArea(.all)
-                .foregroundColor(.white)
-
-                            
-//                Spacer()
-//                    .frame(height: 20)
+            
+            ZStack {
                 
+                RadialGradient(gradient: Gradient(colors: [.blue, .red]), center: .center, startRadius: 100, endRadius: 470)
                 VStack(spacing: CGFloat(verticalPaddingForForm)) {
                     
                     HStack {
-                        Image("graph")
-                            .resizable()
-                            .frame(width: 150.0, height: 150.0)
-                            //.scaledToFit()
                         
-                        VStack {
-                            
-                            HStack{
-                                Text("Carbs")
-                                Circle()
-                                    .fill(Color.blue)
-                                    .frame(width: 10.0, height: 10.0)
-                            }
-                            HStack{
-                                Text("Protein")
-                                Circle()
-                                    .fill(Color.orange)
-                                    .frame(width: 10.0, height: 10.0)
-                            }
-                            HStack{
-                                Text("Fat")
-                                Circle()
-                                    .fill(Color.green)
-                                    .frame(width: 10.0, height: 10.0)
-                            }
-                            
-                        }//VStack
-                        
-                    }//HStack
-                    .frame(width: 350, height: 170, alignment: .center)
-                    .background(Color(.black))
-                    .cornerRadius(15)
-                    .foregroundColor(.white)
-                        
-                    HStack {
-                        VStack {
-                            Text("Your goal")
-                                .font(.system(size: 12))
-                            Text("1500")
-                        }
-                        Text("+")
-                        VStack {
-                            Text("Exercise")
-                                .font(.system(size: 12))
-                            Text("0")
-                        }
-                        Text("-")
-                            .padding(.top)
-                        VStack {
-                            Text("Calories Eaten")
-                                .font(.system(size: 12))
-                            Text("350")
-                        }
-                        Text("=")
-                        VStack {
-                            Text("Calories left")
-                                .font(.system(size: 12))
-                            Text("1150")
-                        }
-                    }//HStack
-                    .frame(width: 350, height: 100, alignment: .center)
-                    .background(Color(.black))
-                    .cornerRadius(15)
-                    .foregroundColor(.white)
-                    
-                    HStack{
-                        VStack {
-                            Text("Breakfast")
-                                .padding()
-                            Text("Eggs")
-                        }.font(.system(size: 12))
+                        Text("<")
+                            .padding(.leading)
+                        Text(todaysDate)
+                            .padding()
+                        Text(">")
                         Spacer()
-                        VStack {
-                            Button(action: {
-                                
-                            }) {
-                                Text("+")
-                                    .font(.system(size: 20))
-                            }//Button
-                            
-                            NavigationLink(destination:FoodView(viewModel: FoodDataViewModel(foodData: FoodData(name: "test", cal: 0, carbs: 0, fat: 0, protein: 0)))) {
-                                EmptyView()
-                                Text("+")
-                                    .foregroundColor(.white)
-                                    .padding()
-                            }//NavigationLink
-                            .background(Color(.black))
-                            .cornerRadius(15)
-                            
-                            Text("350 cal")
-                                .padding()
-                            
-                            
-                        }
-                        
+                            .scaledToFit()
+                        Text(viewModel.data.firstName)
+                        Image(systemName: "person.fill")
+                            .padding()
                     }//HStack
-                    .frame(width: 350, height: 100, alignment: .center)
+                    .padding(.top, 40)
+                    .frame(width: 380, height: 80, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .cornerRadius(10)
                     .background(Color(.black))
-                    .cornerRadius(15)
+                    .edgesIgnoringSafeArea(.all)
                     .foregroundColor(.white)
-
+                    .zIndex(1)
                     
-                        
-                        
-                        
-                   }//VStack
-                    .onAppear{
-                        viewModel.getUserInputData()
-                    }
-                    .padding(.horizontal, CGFloat(verticalPaddingForForm))
+                    
+                  
+                    ScrollView {
+                        VStack {
                             
-                Button(action: {
+                            
+                            VStack(spacing: CGFloat(verticalPaddingForForm)) {
+                                
+                                
+                                VStack {
+                                    ForEach(logViewModel.data) { data in
+                                        Text(String(describing: data.actualDate))
+                                        ForEach(data.breakfast) { breakfast in
+                                        Text(breakfast.name)
+                                        
+                                        }
+                                    }
+                                }
+                                
+                                
+                                HStack {
+                                    //                        Image("graph")
+                                    //                            .resizable()
+                                    //                            .frame(width: 150.0, height: 150.0)
+                                    //                            //.scaledToFit()
+                                    
+                                    
+                                    PieChartView(data: [8,5,6], title: "Macro", style: chartStyle)
+                                        .padding()
+                                    
+                                    VStack {
+                                        
+                                        HStack{
+                                            Text("Carbs")
+                                            Circle()
+                                                .fill(Color.blue)
+                                                .frame(width: 10.0, height: 10.0)
+                                        }
+                                        HStack{
+                                            Text("Protein")
+                                            Circle()
+                                                .fill(Color.orange)
+                                                .frame(width: 10.0, height: 10.0)
+                                        }
+                                        HStack{
+                                            Text("Fat")
+                                            Circle()
+                                                .fill(Color.green)
+                                                .frame(width: 10.0, height: 10.0)
+                                        }
+                                        
+                                    }//VStack
+                                    
+                                }//HStack
+                                .frame(width: 350, height: 300, alignment: .center)
+                                .background(Color(.black))
+                                .cornerRadius(15)
+                                .foregroundColor(.white)
+                                
+                                HStack {
+                                    VStack {
+                                        Text("Your goal")
+                                            .font(.system(size: 12))
+                                        Text("1500")
+                                    }
+                                    Text("+")
+                                    VStack {
+                                        Text("Exercise")
+                                            .font(.system(size: 12))
+                                        Text("0")
+                                    }
+                                    Text("-")
+                                        .padding(.top)
+                                    VStack {
+                                        Text("Calories Eaten")
+                                            .font(.system(size: 12))
+                                        Text("350")
+                                    }
+                                    Text("=")
+                                    VStack {
+                                        Text("Calories left")
+                                            .font(.system(size: 12))
+                                        Text("1150")
+                                    }
+                                    
+                                    
+                                }//HStack
+                                .frame(width: 350, height: 100, alignment: .center)
+                                .background(Color(.black))
+                                .cornerRadius(15)
+                                .foregroundColor(.white)
+                                
+                            
+                                
+                                
+                                HStack{
+                                    
+                                    VStack{
+                                        
+                                        HStack {
+                                            Text("Breakfast")
+                                                .padding()
+                                            
+                                            NavigationLink(destination:FoodView(viewModel: FoodDataViewModel(foodData: FoodData(name: "test", cal: 0, carbs: 0, fat: 0, protein: 0)))) {
+                                                EmptyView()
+                                                Text("+")
+                                                    .foregroundColor(.white)
+                                            }//NavigationLink
+                                            .background(Color(.black))
+                                            .cornerRadius(15)
+                                            .padding()
+                                            
+                                        }//HStack
+                                        .font(.system(size: 12))
+                                        
+                                        Spacer()
+                                        
+                                        Text(logViewModel.data.first?.breakfast.first?.name ?? "no data")
+                                        
+                                     
+                                        
+                                        HStack {
+                                            
+                                            
+                                            
+                                            
+                                         
+                                            
+                                            
+                                            
+                                            
+                                            //                                if let data = logViewModel.data.first, let breakfast = data.breakfast.first {
+                                            //                                    Text(breakfast.name)
+                                            //
+                                            //                                    Text(String(breakfast.cal))
+                                            //                                        .padding()
+                                            //}
+                                            
+                                        }//HStack
+                                        
+                                        
+                                        
+                                    }//VStack
+                                    
+                                    
+                                }//HStack
+                                //.frame(width: 350, height: 100, alignment: .center)
+                                .background(Color(.black))
+                                .cornerRadius(15)
+                                .foregroundColor(.white)
+                                
+                                
+                                HStack{
+                                    
+                                    VStack{
+                                        
+                                        HStack {
+                                            Text("Lunch")
+                                                .padding()
+                                            
+                                            NavigationLink(destination:FoodView(viewModel: FoodDataViewModel(foodData: FoodData(name: "test", cal: 0, carbs: 0, fat: 0, protein: 0)))) {
+                                                EmptyView()
+                                                Text("+")
+                                                    .foregroundColor(.white)
+                                            }//NavigationLink
+                                            .background(Color(.black))
+                                            .cornerRadius(15)
+                                            .padding()
+                                            
+                                        }//HStack
+                                        .font(.system(size: 12))
+                                        
+                                        Spacer()
+                                        
+                                        HStack {
+                                            Text(self.lunch[0].name)
+                                            
+                                            
+                                            
+                                            
+                                            Text(String(self.lunch[0].cal))
+                                                .padding()
+                                        }//HStack
+                                        
+                                        
+                                        
+                                    }//VStack
+                                    
+                                    
+                                }//HStack
+                                .frame(width: 350, height: 100, alignment: .center)
+                                .background(Color(.black))
+                                .cornerRadius(15)
+                                .foregroundColor(.white)
+                                
+                                
+                                HStack{
+                                    
+                                    VStack{
+                                        
+                                        HStack {
+                                            Text("Dinner")
+                                                .padding()
+                                            
+                                            NavigationLink(destination:FoodView(viewModel: FoodDataViewModel(foodData: FoodData(name: "test", cal: 0, carbs: 0, fat: 0, protein: 0)))) {
+                                                EmptyView()
+                                                Text("+")
+                                                    .foregroundColor(.white)
+                                            }//NavigationLink
+                                            .background(Color(.black))
+                                            .cornerRadius(15)
+                                            .padding()
+                                            
+                                        }//HStack
+                                        .font(.system(size: 12))
+                                        
+                                        Spacer()
+                                        
+                                        HStack {
+                                            Text(self.dinner[0].name)
+                                            
+                                            
+                                            
+                                            
+                                            Text(String(self.dinner[0].cal))
+                                                .padding()
+                                        }//HStack
+                                        
+                                        
+                                        
+                                    }//VStack
+                                    
+                                    
+                                }//HStack
+                                .frame(width: 350, height: 100, alignment: .center)
+                                .background(Color(.black))
+                                .cornerRadius(15)
+                                .foregroundColor(.white)
+                                
+                                
+                                HStack{
+                                    
+                                    VStack{
+                                        
+                                        HStack {
+                                            Text("Exercise")
+                                                .padding()
+                                            
+                                            NavigationLink(destination:ExerciseView(viewModel: ExerciseDataViewModel())) {
+                                                EmptyView()
+                                                Text("+")
+                                                    .foregroundColor(.white)
+                                            }//NavigationLink
+                                            .background(Color(.black))
+                                            .cornerRadius(15)
+                                            .padding()
+                                            
+                                        }//HStack
+                                        .font(.system(size: 12))
+                                        
+                                        Spacer()
+                                        
+                                        HStack {
+                                            Text(self.exercise[0].exerciseName)
+                                            
+                                            
+                                            
+                                            
+                                            Text(String(self.exercise[0].caloriesBurned))
+                                                .padding()
+                                        }//HStack
+                                        
+                                        
+                                        
+                                    }//VStack
+                                    
+                                    
+                                }//HStack
+                                .frame(width: 350, height: 100, alignment: .center)
+                                .background(Color(.black))
+                                .cornerRadius(15)
+                                .foregroundColor(.white)
+                                
+                                Button(action: {
+                                    logViewModel.storeLogData()
+                                    
+                                }) {
+                                    Text("Store Log")
+                                        .frame(minWidth: 0, maxWidth: 100, minHeight: 0, maxHeight: 50)
+                                    
+                                }
+                                .background(Color.black)
+                                .foregroundColor(Color.white)
+                                .cornerRadius(40)
+                                
+                                
+                                
+                            }//VStack
+                            
+                            
+                        }//LazyVStack
+                    }//ScroolView
                     
-                }) {
-                    Text("+")
-                        .font(.system(size: 20))
-                }//Button
-                
-                NavigationLink(destination:ExerciseView(viewModel: ExerciseDataViewModel())) {
-                    EmptyView()
-                    Text("ALO E")
-                        .foregroundColor(.white)
-                        .padding()
-                }//NavigationLink
-                .background(Color(.black))
-                .cornerRadius(15)
-                
-                List(logViewModel.data) { data in
-                        VStack(alignment: .leading) {
-                            // 3.
-                            Text(data.userId)
-                        }}
-                
-            }//VStack
-           
-
-        }//ZStack
-        .edgesIgnoringSafeArea(.all)
-
-        
-     
-    }//some Viwe
+                    
+                }//ZStack
+                .edgesIgnoringSafeArea(.all)
+                .onAppear {
+                    viewModel.getUserInputData()
+                    logViewModel.getAllLogs()
+                }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        }//NavigationView
+       
+    }//some View
+   
 }//View
-
-struct ListHeader: View {
-    var body: some View {
-        HStack {
-            Image(systemName: "map")
-            Text("Hiking Trails in Silicon Valley")
+    
+    struct HomePage_Previews: PreviewProvider {
+        static var previews: some View {
+            HomePage(viewModel: UserDataViewModel(data: UserData(id: "0", firstName: "test", lastName: "test", gender: "test", height: "test", weight: "test", age: "test", weightTarget: "test")), logViewModel: LogViewModel())
         }
-        Spacer()
     }
-}
+    
+    
+    
+    
+    
+    
+    
+    //    List {
+    //                        ForEach(logViewModel.data) { data in
+    //
+    //                            Text(data.breakfast[0].name)
+    //
+    //                        }
+    //                    }
+    //                   Text(logViewModel.data[0].breakfast[0].name)
+    
+    
+    
+    //                List(logViewModel.data) { data in
+    //                        VStack(alignment: .leading) {
+    //                            // 3.
+    //                            Text(data.userId)
+    //                        }}
+    //
+    //            }//VStack
+    //            .padding(.horizontal, CGFloat(verticalPaddingForForm))
+    
+    
+    //                NavigationLink(destination:ExerciseView(viewModel: ExerciseDataViewModel())) {
+    //                    EmptyView()
+    //                    Text("ALO E")
+    //                        .foregroundColor(.white)
+    //                        .padding()
+    //                }//NavigationLink
+    //                .background(Color(.black))
+    //                .cornerRadius(15)
+    
+    
+    
+    //Button(action: {
+    //                        logViewModel.storeLogData()
+    //
+    //                }) {
+    //                    Text("Store Log")
+    //                        .frame(minWidth: 0, maxWidth: 100, minHeight: 0, maxHeight: 50)
+    //
+    //                }
+    //                .background(Color.black)
+    //                .foregroundColor(Color.white)
+    //                .cornerRadius(40)
 
-struct HomePage_Previews: PreviewProvider {
-    static var previews: some View {
-        HomePage(viewModel: UserDataViewModel(data: UserData(id: "0", firstName: "test", lastName: "test", gender: "test", height: "test", weight: "test", age: "test", weightTarget: "test")))
-    }
-}

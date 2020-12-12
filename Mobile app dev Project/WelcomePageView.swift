@@ -18,6 +18,7 @@ struct WelcomePageView: View {
         
         
         NavigationView {
+            
             ZStack {
                 RadialGradient(gradient: Gradient(colors: [.blue, .red]), center: .center, startRadius: 100, endRadius: 470)
                 

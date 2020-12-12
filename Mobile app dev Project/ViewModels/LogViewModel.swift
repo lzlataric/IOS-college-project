@@ -12,14 +12,19 @@ import FirebaseDatabase
 import FirebaseFirestore
 
 final class LogViewModel: ObservableObject {
-    //@Published var foodOne  : FoodData
+//    @Published private(set) var emptyLogData : [Log] = [Log(userId: "", currentDate: Timestamp(), breakfast: [FoodData(name: "", cal: 0, carbs: 0, fat: 0, protein: 0)], lunch: [FoodData(name: "", cal: 0, carbs: 0, fat: 0, protein: 0)], dinner: [FoodData(name: "", cal: 0, carbs: 0, fat: 0, protein: 0)], sleep: 0, exercise: [ExerciseData(exerciseName: "", caloriesBurned: 0)], weight: 0)]
     @Published private(set) var data = [Log]()
+    @Published private var date = Timestamp(date: Date())
+    let dateFormatter = DateFormatter()
+    
     
     init() {
-        getAllLogs()
+       // getAllLogs()
     }
     
     func getAllLogs() {
+        
+        self.data = []
         
         Firestore.firestore()
             .collection("Log")
@@ -27,29 +32,35 @@ final class LogViewModel: ObservableObject {
                 if let err = err {
                     print("Error writing document: \(err)")
                 } else if let querysnaphot = arg {
-                    
                     for document in querysnaphot.documents{
-                        
+                        //let date = postTimestamp.dateValue()
+                        let user = Auth.auth().currentUser?.uid
                         let response = document.data()
-                        
-                        guard
+                        do {
+                            let log = try FirebaseDecoder().decode(Log.self, from: response)
                             
-                              let userId = response["userId"] as? String,
-                              let breakfast = response["breakfast"] as? [FoodData],
-                              let currentDate = response["currentDate"] as? NSObject,
-                              let lunch = response["lunch"] as? [FoodData],
-                              let dinner = response["dinner"] as? [FoodData],
-                              let sleep = response["sleep"] as? Double,
-                              let exercise = response["exercise"] as? [ExerciseData],
-                              let weight = response["weight"] as? Double
-                        else {
+                            self.dateFormatter.dateFormat = "yyyy-MM-dd"
+                            let actualDate = self.dateFormatter.string(from: log.actualDate)
+                            let todaysDate = self.dateFormatter.string(from: Date())
+                            print(actualDate)
                             
-                            continue
+                            //print(user?.uid)
+                            print(log.userId)
+                            //if(actualDate == todaysDate && user == log.userId){
+                            if(actualDate == todaysDate){
+                                DispatchQueue.main.async {
+                                    self.data.append(log)
+                                    print(self.data)
+                                }
+                                
+                            }
+                            
+                        } catch {
+                            print(error)
                         }
-                        let log = Log(userId: userId, breakfast: breakfast, lunch: lunch, dinner: dinner, sleep: sleep, exercise: exercise, weight: weight)
-                        self.data.append(log)
                         
                         
+
                         
                         
                     }
@@ -60,4 +71,58 @@ final class LogViewModel: ObservableObject {
             }//getDocument
     }//func getUserInputData
     
+    func storeLogData() {
+        
+        Firestore.firestore()
+            .collection("Log")
+            .document("4")
+            .setData([
+                "userId": "2",
+                "currentDate": Timestamp(date: Date()),
+                "breakfast": [
+                    [
+                        "name": "Kruh",
+                        "cal" :  5.0,
+                        "carbs" : 5.0,
+                        "fat" : 5.0,
+                        "protein" : 6
+                    ]
+                ],
+                "lunch": [
+                    [
+                        "name": "name2",
+                        "cal" :  5.0,
+                        "carbs" : 5.0,
+                        "fat" : 5.0,
+                        "protein" : 6
+                    ]
+                ],
+                "dinner": [
+                    [
+                        "name": "name3",
+                        "cal" :  5.0,
+                        "carbs" : 5.0,
+                        "fat" : 5.0,
+                        "protein" : 6
+                    ]
+                ],
+                "exercise": [
+                    [
+                        "exerciseName": "name1",
+                        "caloriesBurned": 90
+                    ]
+                ],
+                "sleep": 8,
+                "weight": 87
+            ]) { err in
+                if let err = err {
+                    print("Error writing document: \(err)")
+                } else {
+                    print("Document successfully written!")
+                }
+            }
+    }//storeLogData
+    
+    
 }//class
+//userId: String, currentLogDate: Date, breakfast: [FoodData], lunch: [FoodData], dinner: [FoodData], sleep: Double, exercise: [ExerciseData], weight: Double, documentId: String
