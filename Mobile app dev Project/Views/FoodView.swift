@@ -13,6 +13,13 @@ struct FoodView: View {
     
     @Binding var breakfast: [FoodData]
     
+    @State var name = ""
+    @State var cal : Double = 0
+    @State var carbs : Double = 0
+    @State var fat : Double = 0
+    @State var protein : Double = 0
+    @State var shouldNavigate = false
+    
     
     @State var search: String = ""
     
@@ -42,11 +49,19 @@ struct FoodView: View {
                     VStack(alignment: .leading) {
                         // 3.
                         Text(data.name)
-                            .onLongPressGesture {
-                                breakfast.append(data)
-                                print(breakfast)
-                                }
+                            .onTapGesture {
+                                self.name = data.name
+                                self.cal = data.cal
+                                self.carbs = data.carbs
+                                self.fat = data.fat
+                                self.protein = data.protein
+                                self.shouldNavigate = true
+                                print(self.name)
+                            }
                     }
+                }
+                NavigationLink(destination: FoodDetailView(name: $name, cal: $cal, carbs: $carbs, fat: $fat, protein: $protein, foodlist: $breakfast),  isActive: $shouldNavigate) {
+                    EmptyView()
                 }
             } else {
                 List(getData(search: search)) { data in

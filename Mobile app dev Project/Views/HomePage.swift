@@ -26,6 +26,8 @@ struct HomePage: View {
     // var exercise: [ExerciseData] = [ExerciseData(exerciseName: "4", caloriesBurned: 0)]
     @State var exercise: [ExerciseData] = []
     
+    let user = Auth.auth().currentUser
+    
     var todaysDate = "Fri, 9 Oct"
     @State private var shouldNavigate = true
     
@@ -154,7 +156,7 @@ struct HomePage: View {
                                         Spacer()
                                             .frame(width: 200)
                                         
-                                        NavigationLink(destination:FoodView(viewModel: FoodDataViewModel(foodData: FoodData(name: "test", cal: 0, carbs: 0, fat: 0, protein: 0)), breakfast: $breakfast)) {
+                                        NavigationLink(destination:FoodView(viewModel: FoodDataViewModel(foodData: FoodData(name: "test", cal: 0.0, carbs: 0.0, fat: 0.0, protein: 0.0)), breakfast: $breakfast)) {
                                             EmptyView()
                                             Text("+")
                                                 .foregroundColor(.white)
@@ -184,6 +186,11 @@ struct HomePage: View {
                                                     Text(String(food.cal) )
                                                 }//VStack
                                                 .frame(alignment: .leading)
+                                                
+                                                Text("-")
+                                                    .onLongPressGesture {
+                                                        breakfast.remove(at: 0)
+                                                    }
                                                 
                                             }//HStack
                                         }
@@ -368,7 +375,7 @@ struct HomePage: View {
                             .foregroundColor(.white)
                             
                             Button(action: {
-                                logViewModel.storeLogData()
+                                logViewModel.storeLogData(userId: user?.uid ?? "" , breakfast: breakfast, dinner: dinner, lunch: lunch, exercise: exercise, sleep: sleep, weight: weight)
                                 
                             }) {
                                 Text("Store Log")

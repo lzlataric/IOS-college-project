@@ -10,16 +10,14 @@ import SwiftUI
 struct ExerciseView: View {
     @ObservedObject var exercises = ExerciseDataViewModel()
     @ObservedObject var viewModel : ExerciseDataViewModel
-    @State var search: String = ""
     
     @State var caloriesBurned = 0
     @State var exerciseName = ""
     @State var shouldNavigate = false
-    //    @State var isSelected : Color = .white
-    
     
     @Binding var exercise : [ExerciseData]
     
+    @State var search: String = ""
     func getData(search: String) -> [ExerciseData] {
         
         let filtered = exercises.data.filter { (obj: ExerciseData) in

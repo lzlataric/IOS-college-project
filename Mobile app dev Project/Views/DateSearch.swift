@@ -332,7 +332,7 @@ struct DateSearch: View {
                             .foregroundColor(.white)
                             
                             Button(action: {
-                                logViewModel.storeLogData()
+                                //logViewModel.storeLogData()
                                 
                             }) {
                                 Text("Store Log")
