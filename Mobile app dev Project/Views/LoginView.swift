@@ -13,9 +13,7 @@ import FirebaseDatabase
 
 
 struct LoginView: View {
-    
-    //@ObservedObject var logViewModel = LogViewModel()
-    
+        
     //MARK: Properties
     @State var email: String = "dominik.bosnjak94@gmail.com"
     @State var password: String = "test1234"
@@ -46,6 +44,7 @@ struct LoginView: View {
                 Text("Log In")
                     .font(Font.largeTitle.weight(.heavy))
                     .foregroundColor(Color(.white))
+                    .shadow(radius: 10)
 
                 
                 HStack {
@@ -58,6 +57,8 @@ struct LoginView: View {
                 .padding()
                 .background(Color.white)
                 .cornerRadius(10)
+                .opacity(0.8)
+                .shadow(radius: 10)
                 
                 
                 HStack {
@@ -66,34 +67,34 @@ struct LoginView: View {
                     SecureField("Password", text: $password)
                         .autocapitalization(.none)
                         .foregroundColor(Color.black)
+                        .opacity(0.3)
                 }
                 .padding()
                 .background(Color.white)
                 .cornerRadius(10)
-                
+                .opacity(0.8)
+                .shadow(radius: 10)
+
                 
                 Button(action: logIn) {
                     Text("Login")
                     .frame(minWidth: 0, maxWidth: 100, minHeight: 0, maxHeight: 50)
 
                 }
-                .background(Color.red)
+                .background(Color.black)
                 .foregroundColor(Color.white)
                 .cornerRadius(40)
+                .shadow(radius: 10)
+
                 
                 NavigationLink(destination: HomePage(viewModel: UserDataViewModel(data: UserData(id: "test", firstName: "test", lastName: "test", gender: "test", height: "test", weight: "test", age: "test", weightTarget: "test")), logViewModel: logViewModel), isActive: $shouldNavigate) {
                     EmptyView()
                 }
-                .navigationBarTitle("")
-                .navigationBarHidden(true)
-                .navigationBarBackButtonHidden(true)
                 
 
             }//VStack
             .padding(.horizontal, CGFloat(verticalPaddingForForm))
-//            .onDisappear{
-//                logViewModel.getAllLogs()
-//            }
+
         }//ZStack
         .edgesIgnoringSafeArea(.all)
         

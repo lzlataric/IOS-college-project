@@ -42,6 +42,7 @@ struct UserDataInputView: View {
                     .font(Font.largeTitle.weight(.heavy))
                     .foregroundColor(Color(.white))
                     .padding(.bottom)
+                    .shadow(radius: 10)
                 
                 HStack {
                     Image(systemName: "person")
@@ -53,7 +54,9 @@ struct UserDataInputView: View {
                 .padding()
                 .background(Color.white)
                 .cornerRadius(10)
-                
+                .opacity(0.8)
+                .shadow(radius: 10)
+
                 HStack {
                     Image(systemName: "person")
                         .foregroundColor(.secondary)
@@ -64,6 +67,9 @@ struct UserDataInputView: View {
                 .padding()
                 .background(Color.white)
                 .cornerRadius(10)
+                .opacity(0.8)
+                .shadow(radius: 10)
+                    
                 
                 HStack {
                     Image(systemName: "age")
@@ -75,6 +81,9 @@ struct UserDataInputView: View {
                 .padding()
                 .background(Color.white)
                 .cornerRadius(10)
+                .opacity(0.8)
+                .shadow(radius: 10)
+                
                 
                 HStack {
                     Image(systemName: "gender")
@@ -86,6 +95,9 @@ struct UserDataInputView: View {
                 .padding()
                 .background(Color.white)
                 .cornerRadius(10)
+                .opacity(0.8)
+                .shadow(radius: 10)
+                
                 
                 HStack {
                     Image(systemName: "measure")
@@ -97,6 +109,8 @@ struct UserDataInputView: View {
                 .padding()
                 .background(Color.white)
                 .cornerRadius(10)
+                .opacity(0.8)
+                .shadow(radius: 10)
                 
                 HStack {
                     Image(systemName: "measure")
@@ -108,8 +122,10 @@ struct UserDataInputView: View {
                 .padding()
                 .background(Color.white)
                 .cornerRadius(10)
+                .opacity(0.8)
+                .shadow(radius: 10)
                 
-                
+
                 HStack {
                     Image(systemName: "measure")
                         .foregroundColor(.secondary)
@@ -121,6 +137,9 @@ struct UserDataInputView: View {
                 .background(Color.white)
                 .cornerRadius(10)
                 .padding(.bottom)
+                .opacity(0.8)
+                .shadow(radius: 10)
+                
                 
                 Button(action: storeData) {
                     Text("Sign up")
@@ -130,6 +149,8 @@ struct UserDataInputView: View {
                 .background(Color.black)
                 .foregroundColor(Color.white)
                 .cornerRadius(40)
+                .opacity(0.8)
+                .shadow(radius: 10)
                 
                 NavigationLink(destination: HomePage(viewModel: UserDataViewModel(data: UserData(id: "test", firstName: "test", lastName: "test", gender: "test", height: "test", weight: "test", age: "test", weightTarget: "test")), logViewModel: LogViewModel()), isActive: $shouldNavigate) {
                     EmptyView()

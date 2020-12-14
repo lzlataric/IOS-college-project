@@ -12,23 +12,25 @@ import SwiftUICharts
 struct HomePage: View {
     @ObservedObject var viewModel : UserDataViewModel
     @ObservedObject var logViewModel : LogViewModel
-
+    
     @State var sleep : Double = 0
-    @State var weight: Double = 0
+    @State var weight: Double = 80
     @State var userId : String = ""
     @State var currentDate = Date()
-    // var breakfast: [FoodData] = [FoodData(name: "1", cal: 0, carbs: 0, fat: 0, protein: 0)]
     @State var breakfast: [FoodData] = []
-    // var lunch: [FoodData] = [FoodData(name: "2", cal: 0, carbs: 0, fat: 0, protein: 0)]
     @State var lunch: [FoodData] = []
-    //var dinner: [FoodData] = [FoodData(name: "3", cal: 0, carbs: 0, fat: 0, protein: 0)]
     @State var dinner: [FoodData] = []
-    // var exercise: [ExerciseData] = [ExerciseData(exerciseName: "4", caloriesBurned: 0)]
-    @State var exercise: [ExerciseData] = []
+    @State var exerciseData: [ExerciseData] = []
+    
+    @State var breakfastCounter = 0
+    @State var dinnerCounter = 0
+    @State var lunchCounter = 0
+    @State var exerciseCounter = 0
     
     let user = Auth.auth().currentUser
     
-    var todaysDate = "Fri, 9 Oct"
+    @State var disableStoreButton = false
+    
     @State private var shouldNavigate = true
     
     //General UI properties
@@ -37,46 +39,74 @@ struct HomePage: View {
     //Graph UI propreties
     let chartStyle = ChartStyle(backgroundColor: Color.black, accentColor: Colors.OrangeStart, secondGradientColor: Colors.OrangeEnd, textColor: Color.white, legendTextColor: Color.white, dropShadowColor: .black )
     
+    //Calculating daily calories
+    @State private var caloriesLeft : Double = 0
+    @State private var calorieIntake : Double = 0
+    @State private var caloriesBurnedWithExercise : Double = 0
+    @State private var goalCalories : Double = 2500
+    
+    func calorieCalculation() {
+        
+        for food in breakfast {
+            self.calorieIntake = self.calorieIntake + food.cal
+        }
+        for food in lunch {
+            self.calorieIntake = self.calorieIntake + food.cal
+        }
+        for food in dinner {
+            self.calorieIntake = self.calorieIntake + food.cal
+        }
+        
+        for exercise in exerciseData {
+            self.caloriesBurnedWithExercise = self.caloriesBurnedWithExercise + Double(exercise.caloriesBurned)
+        }
+        
+        self.caloriesLeft = self.goalCalories - self.calorieIntake + self.caloriesBurnedWithExercise
+    }
+    
     
     var body: some View {
         
-        
-        ZStack {
+        TabView {
             
-            RadialGradient(gradient: Gradient(colors: [.blue, .red]), center: .center, startRadius: 100, endRadius: 470)
-            VStack(spacing: CGFloat(verticalPaddingForForm)) {
+            ZStack {
                 
-                HStack {
+                RadialGradient(gradient: Gradient(colors: [.blue, .red]), center: .center, startRadius: 100, endRadius: 470)
+                
+                VStack(spacing: CGFloat(verticalPaddingForForm)) {
                     
-                    Text("<")
-                        .padding(.leading)
-                    Text(todaysDate)
-                        .padding()
-                    Text(">")
-                    Spacer()
-                        .scaledToFit()
-                    Text(viewModel.data.firstName)
-                    Image(systemName: "person.fill")
-                        .padding()
-                }//HStack
-                .padding(.top, 40)
-                .frame(width: 380, height: 80, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                .cornerRadius(10)
-                .background(Color(.black))
-                .edgesIgnoringSafeArea(.all)
-                .foregroundColor(.white)
-                .zIndex(1)
-                
-                            
-                ScrollView {
+                    HStack {
+                        
+                        Text(Date(), style: .date)
+                            .font(.headline)
+                            .padding(.leading)
+                        Spacer()
+                            .scaledToFit()
+                        Text(viewModel.data.firstName)
+                            .font(.headline)
+                        Image(systemName: "person.fill")
+                            .padding()
+                    }//HStack
+                    .padding(.top, 40)
+                    .frame(width: 380, height: 90, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .cornerRadius(10)
+                    .background(Color(.black))
+                    .edgesIgnoringSafeArea(.all)
+                    .foregroundColor(.white)
+                    .zIndex(1)
+                    .shadow(radius: 10)
+                    
+                    
+                    ScrollView(showsIndicators: false) {
                         
                         
                         VStack(spacing: CGFloat(verticalPaddingForForm)) {
                             
                             
+                            
                             HStack {
                                 
-                                PieChartView(data: [8,5,6], title: "Macro", style: chartStyle)
+                                PieChartView(data: [8,5,6], title: "Macro Nutrients ", style: chartStyle)
                                     .padding()
                                     .scaledToFit()
                                 
@@ -113,36 +143,47 @@ struct HomePage: View {
                                 VStack {
                                     Text("Your goal")
                                         .font(.system(size: 12))
-                                    Text("1500")
+                                    Text(String(goalCalories))
+                                        .padding(.top)
                                 }
                                 Text("+")
+                                    .padding(.top, 35)
                                 VStack {
                                     Text("Exercise")
                                         .font(.system(size: 12))
-                                    Text("0")
+                                    Text(String(caloriesBurnedWithExercise))
+                                        .padding(.top)
                                 }
                                 Text("-")
-                                    .padding(.top)
+                                    .padding(.top, 35)
                                 VStack {
                                     Text("Calories Eaten")
                                         .font(.system(size: 12))
-                                    Text("350")
+                                    Text(String(calorieIntake))
+                                        .padding(.top)
                                 }
                                 Text("=")
+                                    .padding(.top, 35)
                                 VStack {
                                     Text("Calories left")
                                         .font(.system(size: 12))
-                                    Text("1150")
+                                    if(caloriesLeft < 0) {
+                                        Text(String(caloriesLeft))
+                                            .foregroundColor(Color(.red))
+                                            .padding(.top)
+                                    } else {
+                                        Text(String(caloriesLeft))
+                                            .foregroundColor(Color(.green))
+                                            .padding(.top)
+                                    }
                                 }
-                                
                                 
                             }//HStack
                             .frame(width: 350, height: 100, alignment: .center)
                             .background(Color(.black))
                             .cornerRadius(15)
                             .foregroundColor(.white)
-                            
-                            
+                            .shadow(radius: 10)
                             
                             
                             HStack{
@@ -152,26 +193,27 @@ struct HomePage: View {
                                     HStack {
                                         Text("Breakfast")
                                             .padding()
+                                            .font(.headline)
                                         
                                         Spacer()
-                                            .frame(width: 200)
+                                            .frame(width: 190)
                                         
                                         NavigationLink(destination:FoodView(viewModel: FoodDataViewModel(foodData: FoodData(name: "test", cal: 0.0, carbs: 0.0, fat: 0.0, protein: 0.0)), breakfast: $breakfast)) {
                                             EmptyView()
                                             Text("+")
                                                 .foregroundColor(.white)
+                                                .font(.headline)
                                         }//NavigationLink
                                         .background(Color(.black))
                                         .padding()
+                                        .navigationBarTitle("")
+                                        .navigationBarHidden(true)
+                                        .navigationBarBackButtonHidden(true)
                                         
                                     }//HStack
                                     .font(.system(size: 12))
                                     
                                     Spacer()
-                                    
-                                 
-                            
-                                   // Text(logViewModel.data.first?.breakfast.first?.name ?? "no data")
                                     
                                     VStack {
                                         ForEach(breakfast) { food in
@@ -179,27 +221,49 @@ struct HomePage: View {
                                                 VStack {
                                                     Text(food.name )
                                                 }//VStack
-                                                .frame(alignment: .leading)
-                                                Spacer()
-                                                    .frame(width: 30)
-                                                VStack {
-                                                    Text(String(food.cal) )
-                                                }//VStack
-                                                .frame(alignment: .leading)
+                                                .frame(width: 110, alignment: .leading)
+                                                .padding(.leading, 5)
                                                 
-                                                Text("-")
-                                                    .onLongPressGesture {
-                                                        breakfast.remove(at: 0)
-                                                    }
+                                                Spacer()
+                                                    .frame(width: 50)
+                                                
+                                                VStack {
+                                                    Text(String(round(1000*food.cal)/1000))
+                                                }//VStack
+                                                .frame(width: 60, alignment: .trailing)
+                                                
+                                                
+                                                Spacer()
+                                                    .frame(width: 40)
+                                                
+                                                VStack {
+                                                    Image(systemName: "trash")
+                                                        .onLongPressGesture {
+                                                            if(breakfastCounter < breakfast.count){
+                                                                breakfast.remove(at: breakfastCounter)
+                                                            }else{
+                                                                breakfastCounter += 1
+                                                            }
+                                                            caloriesLeft = 0
+                                                            calorieIntake = 0
+                                                            caloriesBurnedWithExercise = 0
+                                                            goalCalories = 2500
+                                                            calorieCalculation()
+                                                        }
+                                                }//VStack
+                                                .frame(width: 10, alignment: .trailing)
+                                                .padding(.trailing, 5)
+                                                
                                                 
                                             }//HStack
                                         }
+                                        
                                         
                                     }//VStack
                                     .scaledToFit()
                                     .padding(.bottom)
                                     .frame(alignment: .leading)
-           
+                                    
                                 }//VStack
                                 
                                 
@@ -208,6 +272,7 @@ struct HomePage: View {
                             .background(Color(.black))
                             .cornerRadius(15)
                             .foregroundColor(.white)
+                            .shadow(radius: 10)
                             
                             
                             HStack{
@@ -217,11 +282,16 @@ struct HomePage: View {
                                     HStack {
                                         Text("Lunch")
                                             .padding()
+                                            .font(.headline)
+                                        
+                                        Spacer()
+                                            .frame(width: 210)
                                         
                                         NavigationLink(destination:FoodView(viewModel: FoodDataViewModel(foodData: FoodData(name: "test", cal: 0, carbs: 0, fat: 0, protein: 0)), breakfast: $lunch)) {
                                             EmptyView()
                                             Text("+")
                                                 .foregroundColor(.white)
+                                                .font(.headline)
                                         }//NavigationLink
                                         .background(Color(.black))
                                         .cornerRadius(15)
@@ -232,37 +302,62 @@ struct HomePage: View {
                                     
                                     Spacer()
                                     
-                                        VStack {
-                                            ForEach(lunch) { food in
-                                                HStack {
-                                                    VStack {
-                                                        Text(food.name )
-                                                    }//VStack
-                                                    .frame(alignment: .leading)
-                                                    Spacer()
-                                                        .frame(width: 30)
-                                                    VStack {
-                                                        Text(String(food.cal) )
-                                                    }//VStack
-                                                    .frame(alignment: .leading)
-                                                    
-                                                }//HStack
-                                            }
-                                            
-                                        }//VStack
-                                        .scaledToFit()
-                                        .padding(.bottom)
-                                        .frame(alignment: .leading)                                    
+                                    VStack {
+                                        ForEach(lunch) { food in
+                                            HStack {
+                                                VStack {
+                                                    Text(food.name )
+                                                }//VStack
+                                                .frame(width: 110, alignment: .leading)
+                                                .padding(.leading, 5)
+                                                
+                                                Spacer()
+                                                    .frame(width: 50)
+                                                
+                                                VStack {
+                                                    Text(String(round(1000*food.cal)/1000))
+                                                }//VStack
+                                                .frame(width: 60, alignment: .trailing)
+                                                
+                                                Spacer()
+                                                    .frame(width: 40)
+                                                
+                                                VStack {
+                                                    Image(systemName: "trash")
+                                                        .onLongPressGesture {
+                                                            if(lunchCounter < lunch.count){
+                                                                lunch.remove(at: lunchCounter)
+                                                            }else{
+                                                                lunchCounter += 1
+                                                            }
+                                                            caloriesLeft = 0
+                                                            calorieIntake = 0
+                                                            caloriesBurnedWithExercise = 0
+                                                            goalCalories = 2500
+                                                            calorieCalculation()
+                                                        }
+                                                }//VStack
+                                                .frame(width: 10, alignment: .trailing)
+                                                .padding(.trailing, 5)
+                                                
+                                            }//HStack
+                                        }
+                                        
+                                    }//VStack
+                                    .scaledToFit()
+                                    .padding(.bottom)
+                                    .frame(alignment: .leading)
                                     
                                     
                                 }//VStack
                                 
                                 
                             }//HStack
-                            .frame(width: 350, height: 100, alignment: .center)
+                            .frame(width: 350, alignment: .leading)
                             .background(Color(.black))
                             .cornerRadius(15)
                             .foregroundColor(.white)
+                            .shadow(radius: 10)
                             
                             
                             HStack{
@@ -272,11 +367,16 @@ struct HomePage: View {
                                     HStack {
                                         Text("Dinner")
                                             .padding()
+                                            .font(.headline)
+                                        
+                                        Spacer()
+                                            .frame(width: 210)
                                         
                                         NavigationLink(destination:FoodView(viewModel: FoodDataViewModel(foodData: FoodData(name: "test", cal: 0, carbs: 0, fat: 0, protein: 0)), breakfast: $dinner)) {
                                             EmptyView()
                                             Text("+")
                                                 .foregroundColor(.white)
+                                                .font(.headline)
                                         }//NavigationLink
                                         .background(Color(.black))
                                         .cornerRadius(15)
@@ -293,13 +393,37 @@ struct HomePage: View {
                                                 VStack {
                                                     Text(food.name )
                                                 }//VStack
-                                                .frame(alignment: .leading)
+                                                .frame(width: 110, alignment: .leading)
+                                                .padding(.leading, 5)
+                                                
                                                 Spacer()
-                                                    .frame(width: 30)
+                                                    .frame(width: 50)
+                                                
                                                 VStack {
-                                                    Text(String(food.cal) )
+                                                    Text(String(round(1000*food.cal)/1000))
                                                 }//VStack
-                                                .frame(alignment: .leading)
+                                                .frame(width: 60, alignment: .trailing)
+                                                
+                                                
+                                                Spacer()
+                                                    .frame(width: 40)
+                                                VStack {
+                                                    Image(systemName: "trash")
+                                                        .onLongPressGesture {
+                                                            if(dinnerCounter < dinner.count){
+                                                                dinner.remove(at: dinnerCounter)
+                                                            }else{
+                                                                dinnerCounter += 1
+                                                            }
+                                                            caloriesLeft = 0
+                                                            calorieIntake = 0
+                                                            caloriesBurnedWithExercise = 0
+                                                            goalCalories = 2500
+                                                            calorieCalculation()
+                                                        }
+                                                }//VStack
+                                                .frame(width: 10, alignment: .trailing)
+                                                .padding(.trailing, 5)
                                                 
                                             }//HStack
                                         }
@@ -315,10 +439,11 @@ struct HomePage: View {
                                 
                                 
                             }//HStack
-                            .frame(width: 350, height: 100, alignment: .center)
+                            .frame(width: 350, alignment: .leading)
                             .background(Color(.black))
                             .cornerRadius(15)
                             .foregroundColor(.white)
+                            .shadow(radius: 10)
                             
                             
                             HStack{
@@ -328,11 +453,16 @@ struct HomePage: View {
                                     HStack {
                                         Text("Exercise")
                                             .padding()
+                                            .font(.headline)
                                         
-                                        NavigationLink(destination:ExerciseView(viewModel: ExerciseDataViewModel(), exercise: $exercise)) {
+                                        Spacer()
+                                            .frame(width: 190)
+                                        
+                                        NavigationLink(destination:ExerciseView(viewModel: ExerciseDataViewModel(), exerciseList: $exerciseData)) {
                                             EmptyView()
                                             Text("+")
                                                 .foregroundColor(.white)
+                                                .font(.headline)
                                         }//NavigationLink
                                         .background(Color(.black))
                                         .cornerRadius(15)
@@ -344,18 +474,40 @@ struct HomePage: View {
                                     Spacer()
                                     
                                     VStack {
-                                        ForEach(exercise) { exercise in
+                                        ForEach(exerciseData) { exercise in
                                             HStack {
                                                 VStack {
-                                                    Text(exercise.exerciseName )
+                                                    Text(exercise.exerciseName)
                                                 }//VStack
-                                                .frame(alignment: .leading)
+                                                .frame(width: 110, alignment: .leading)
+                                                .padding(.leading, 5)
+                                                
                                                 Spacer()
-                                                    .frame(width: 30)
+                                                    .frame(width: 50)
+                                                
                                                 VStack {
                                                     Text(String(exercise.caloriesBurned))
                                                 }//VStack
-                                                .frame(alignment: .leading)
+                                                .frame(width: 60, alignment: .trailing)
+                                                
+                                                
+                                                Spacer()
+                                                    .frame(width: 40)
+                                                
+                                                VStack {
+                                                    Image(systemName: "trash")
+                                                        .onLongPressGesture {
+                                                            exerciseData.remove(at: exerciseCounter)
+                                                            exerciseCounter += 1
+                                                            caloriesLeft = 0
+                                                            calorieIntake = 0
+                                                            caloriesBurnedWithExercise = 0
+                                                            goalCalories = 2500
+                                                            calorieCalculation()
+                                                        }
+                                                }//VStack
+                                                .frame(width: 10, alignment: .trailing)
+                                                .padding(.trailing, 5)
                                                 
                                             }//HStack
                                         }
@@ -369,36 +521,77 @@ struct HomePage: View {
                                 
                                 
                             }//HStack
-                            .frame(width: 350, height: 100, alignment: .center)
+                            .frame(width: 350, alignment: .leading)
                             .background(Color(.black))
                             .cornerRadius(15)
                             .foregroundColor(.white)
+                            .shadow(radius: 10)
                             
                             Button(action: {
-                                logViewModel.storeLogData(userId: user?.uid ?? "" , breakfast: breakfast, dinner: dinner, lunch: lunch, exercise: exercise, sleep: sleep, weight: weight)
+                                logViewModel.storeLogData(userId: user?.uid ?? "" , breakfast: breakfast, dinner: dinner, lunch: lunch, exercise: exerciseData, sleep: sleep, weight: weight)
+                                self.disableStoreButton = true
                                 
                             }) {
                                 Text("Store Log")
-                                    .frame(minWidth: 0, maxWidth: 100, minHeight: 0, maxHeight: 50)
+                                    .frame(width: 100, height: 50)
                                 
                             }
                             .background(Color.black)
                             .foregroundColor(Color.white)
                             .cornerRadius(40)
-                              
+                            .disabled(self.disableStoreButton)
+                            .shadow(radius: 10)
+                            
+                            Spacer()
+                                .frame(height: 70)
+                            
                         }//VStack
                         
-                }//ScroolView
+                    }//ScroolView
+                    
+                }//VStack
                 
                 
-            }//VStack
-           
+            }//ZStack
+            .edgesIgnoringSafeArea(.all)
+            .onAppear {
+                viewModel.getUserInputData()
+                caloriesLeft = 0
+                calorieIntake = 0
+                caloriesBurnedWithExercise = 0
+                goalCalories = 2500
+                calorieCalculation()
+                breakfastCounter=0
+                lunchCounter = 0
+                dinnerCounter = 0
+                exerciseCounter = 0
+            }
+            .tabItem {
+                Image("homePage")
+                Text("Home")
+            }
             
-        }//ZStack
-        .edgesIgnoringSafeArea(.all)
-        .onAppear {
-            viewModel.getUserInputData()
+            
+            DatePickerView()
+                .tabItem {
+                    Image("dateSearch")
+                    Text("Search by Date")
+                }
+            
+            
+            WeightTrackerView(logViewModel: LogViewModel())
+                .tabItem {
+                    Image("weightTracker").resizable()
+                    Text("Weight Tracker")
+                }
+            
+            
+        }//TabView
+        .accentColor(.white)
+        .onAppear() {
+            UITabBar.appearance().barTintColor = .black
         }
+        
         
     }//some View
     

@@ -14,7 +14,7 @@ extension GeoPoint: GeoPointType {}
 extension FieldValue: FieldValueType {}
 extension Timestamp: TimestampType {}
 
-struct Log: Identifiable,Codable {
+struct Log: Identifiable, Codable {
 //    var foodData : FoodData
 //    // let id = UUID()
     let id = UUID()

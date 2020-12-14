@@ -46,16 +46,16 @@ struct SignUpView: View {
     
     
     var body: some View {
-        
-       // NavigationView {
-        
+                
         ZStack {
             RadialGradient(gradient: Gradient(colors: [.blue, .red]), center: .center, startRadius: 100, endRadius: 470)
             VStack (spacing: CGFloat(verticalPaddingForForm)){
+                
                 Text("Sign In")
                     .font(Font.largeTitle.weight(.heavy))
                     .foregroundColor(Color(.white))
                     .padding(.bottom)
+                    .shadow(radius: 10)
                 
                 HStack {
                     Image(systemName: "person")
@@ -67,6 +67,8 @@ struct SignUpView: View {
                 .padding()
                 .background(Color.white)
                 .cornerRadius(10)
+                .opacity(0.8)
+                .shadow(radius: 10)
                 
                 
                 HStack {
@@ -80,6 +82,8 @@ struct SignUpView: View {
                 .background(Color.white)
                 .cornerRadius(10)
                 .padding(.bottom)
+                .opacity(0.8)
+                .shadow(radius: 10)
                 
                 
                 Button(action: signUp) {
@@ -90,7 +94,7 @@ struct SignUpView: View {
                 .background(Color.black)
                 .foregroundColor(Color.white)
                 .cornerRadius(40)
-                
+                .shadow(radius: 10)
                 
                 NavigationLink(destination: UserDataInputView(), isActive: $shouldNavigate) {
                     EmptyView()
@@ -104,9 +108,6 @@ struct SignUpView: View {
         }//ZStack
         .edgesIgnoringSafeArea(.all)
 
-            
-        //}//navigationView
-        
     }//some View
     
 }//View

@@ -24,15 +24,47 @@ struct ExerciseDetailView: View {
     
     var body: some View {
         
-        TextField("Enter exercise time", text: $quantity)
+        ZStack {
+            RadialGradient(gradient: Gradient(colors: [.blue, .red]), center: .center, startRadius: 100, endRadius: 470)
+            
+            VStack {
+                
+                Text("Enter the exercise time")
+                    .font(Font.title2.weight(.heavy))
+                    .foregroundColor(Color(.white))
+                    .padding(.bottom)
+                    .shadow(radius: 10)
+                
+                TextField("Number of minutes",text: $quantity)
+                    .keyboardType(.numberPad)
+                    .frame(width: 300, height: 40, alignment: .center)
+                    .autocapitalization(.none)
+                    .background(Color.white)
+                    .opacity(0.8)
+                    .shadow(radius: 10)
+                    .cornerRadius(13)
+                    .padding()
+                
+                Button(action: {
+                    calculateQuantity(quantity: quantity)
+                }) {
+                    Text("Add")
+                        .frame(minWidth: 0, maxWidth: 100, minHeight: 0, maxHeight: 50)
+                }
+                .background(Color.black)
+                .foregroundColor(Color.white)
+                .cornerRadius(40)
+                .shadow(radius: 10)
+                
+            }//VStack
+            .cornerRadius(15)
+            .shadow(radius: 10)
+            
+        }//ZStack
+        .edgesIgnoringSafeArea(.all)
         
-        Button(action: {
-            calculateQuantity(quantity: quantity)
-        }) {
-            Text("add food")
-        }
-    }
-}
+    }//some View
+}//View
 
 //struct ExerciseDetailView_Previews: PreviewProvider {
 //    static var previews: some View {

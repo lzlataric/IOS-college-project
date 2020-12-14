@@ -33,53 +33,85 @@ struct FoodView: View {
     }
     
     var body: some View {
-        TextField("Enter a word", text: $search)
-        //.autocapitalizationType
-        //.onChange(of: Equatable, perform: <#T##(Equatable) -> Void#>)
         
-        Button(action: {
-            getData(search: search)
-        }) {
-            Text("Submit")
-        }
-        
-        VStack {
-            if (search == "") {
-                List(foods.data) { data in
-                    VStack(alignment: .leading) {
-                        // 3.
-                        Text(data.name)
-                            .onTapGesture {
-                                self.name = data.name
-                                self.cal = data.cal
-                                self.carbs = data.carbs
-                                self.fat = data.fat
-                                self.protein = data.protein
-                                self.shouldNavigate = true
-                                print(self.name)
-                            }
-                    }
-                }
-                NavigationLink(destination: FoodDetailView(name: $name, cal: $cal, carbs: $carbs, fat: $fat, protein: $protein, foodlist: $breakfast),  isActive: $shouldNavigate) {
-                    EmptyView()
-                }
-            } else {
-                List(getData(search: search)) { data in
-                    VStack(alignment: .leading) {
-                        // 3.
-                        Text(data.name)
-                            .onLongPressGesture {
-                                breakfast.append(data)
-                                print(breakfast)
-                                }
+        ZStack {
+            RadialGradient(gradient: Gradient(colors: [.blue, .red]), center: .center, startRadius: 100, endRadius: 470)
+            
+            VStack {
+                
+                Text("Choose an exercise")
+                    .font(Font.title2.weight(.heavy))
+                    .foregroundColor(Color(.white))
+                    .padding(.bottom)
+                    .shadow(radius: 10)
+                
+                Image("food")
+                    .resizable()
+                    .frame(width: 100, height: 100, alignment: .center)
+                    .shadow(radius: 10)
+                
+                TextField("Enter a exercise", text: $search)
+                    .frame(width: 300, height: 40, alignment: .center)
+                    .autocapitalization(.none)
+                    .background(Color.white)
+                    .opacity(0.8)
+                    .shadow(radius: 10)
+                    .cornerRadius(13)
+                    .padding()
+                
+                
+                
+                    if (search == "") {
+                        List(foods.data) { data in
+                            VStack(alignment: .leading) {
+                                Text(data.name)
+                                    .onTapGesture {
+                                        self.name = data.name
+                                        self.cal = data.cal
+                                        self.carbs = data.carbs
+                                        self.fat = data.fat
+                                        self.protein = data.protein
+                                        self.shouldNavigate = true
+                                    }
+                            }//VStack
+                        }//List
+                        .frame(width: 300, height: 400)
+                        .opacity(0.8)
+                        .shadow(radius: 10)
+                        .cornerRadius(13)
+                        
+                        NavigationLink(destination: FoodDetailView(name: $name, cal: $cal, carbs: $carbs, fat: $fat, protein: $protein, foodlist: $breakfast),  isActive: $shouldNavigate) {
+                            EmptyView()
+                        }
+                    } else {
+                        List(getData(search: search)) { data in
+                            VStack(alignment: .leading) {
+                                Text(data.name)
+                                    .onLongPressGesture {
+                                        breakfast.append(data)
+                                        print(breakfast)
+                                    }
+                            }//VStack
+                        }//List
+                        .frame(width: 300, height: 400)
+                        .opacity(0.8)
+                        .shadow(radius: 10)
+                        .cornerRadius(13)
+                        
+                        NavigationLink(destination: FoodDetailView(name: $name, cal: $cal, carbs: $carbs, fat: $fat, protein: $protein, foodlist: $breakfast),  isActive: $shouldNavigate) {
+                            EmptyView()
+                        }
+                        
                     }
                     
-                    
-                }
-            }
+                }//VStack
+                .cornerRadius(15)
+                .opacity(0.8)
+                .shadow(radius: 10)
+                
+            }//ZStack
+            .edgesIgnoringSafeArea(.all)
             
-            
-        }//VStack
-    }//some View
-}//View
+        }//some View
+    }//View
 

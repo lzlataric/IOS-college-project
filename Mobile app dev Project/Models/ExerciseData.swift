@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ExerciseData: Identifiable, Codable {
+struct ExerciseData: Identifiable, Codable, Equatable, Hashable {
     
     var id = UUID()
     var exerciseName: String

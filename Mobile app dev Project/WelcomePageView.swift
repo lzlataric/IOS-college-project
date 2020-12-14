@@ -24,21 +24,30 @@ struct WelcomePageView: View {
                 
                 VStack {
                     
-                    Image("fitness icon")
+                    Image("fitness icons")
+                        .resizable()
+                        .frame(width: 180, height: 180, alignment: .center)
+                        .padding(.bottom, 50)
+                        .padding(.leading, 15)
+                        .shadow(radius: 10)
                     
                     Text("Welcome to")
+                        .frame(alignment: .center)
                         .font(Font.largeTitle.weight(.heavy))
                         .foregroundColor(Color(.white))
                         .padding(.bottom)
-                    Text("MyFitnessApp")
+                        .shadow(radius: 10)
+                    Text(" MyFitnessApp")
                         .font(Font.largeTitle.weight(.heavy))
                         .foregroundColor(Color(.white))
+                        .frame(alignment: .center)
+                        .shadow(radius: 10)
                     
                     
                     Spacer()
                         .frame(height: 80)
                     
-                    HStack{
+                    VStack{
                         
                         NavigationLink(destination: LoginView()) {
                             Text("Log in")
@@ -46,6 +55,7 @@ struct WelcomePageView: View {
                                 .foregroundColor(.white)
                                 .background(Color.black)
                                 .cornerRadius(40)
+                                .shadow(radius: 10)
                         }
                         
                         NavigationLink(destination: SignUpView()) {
@@ -54,21 +64,26 @@ struct WelcomePageView: View {
                                 .foregroundColor(.white)
                                 .background(Color.black)
                                 .cornerRadius(40)
+                                .shadow(radius: 10)
                         }
                         
-                    }//HStack
+                    }//VStack
                     
                     
                 }//VStack
                 .padding(.horizontal, CGFloat(verticalPaddingForForm))
+                .frame(alignment: .center)
 
                 
             }//ZStack
             .edgesIgnoringSafeArea(.all)
+            .frame(alignment: .center)
 
             
             
         }//NavigationView
+        .accentColor( .black)
+
         
     }//some View
 }//View
