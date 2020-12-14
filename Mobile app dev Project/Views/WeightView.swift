@@ -12,6 +12,9 @@ struct WeightView: View {
     
     @State var quantity = ""
     
+    @Environment(\.presentationMode) private var presentationMode : Binding<PresentationMode>
+
+    
     var body: some View {
         
         ZStack {
@@ -33,10 +36,13 @@ struct WeightView: View {
             .shadow(radius: 10)
             .cornerRadius(13)
             .padding()
+            .multilineTextAlignment(.center)
         
         
         Button(action: {
             weightAmount = Double(quantity) ?? 0
+            self.presentationMode.wrappedValue.dismiss()
+
             
         }) {
             Text("Add")

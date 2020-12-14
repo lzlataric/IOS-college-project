@@ -39,7 +39,7 @@ struct FoodView: View {
             
             VStack {
                 
-                Text("Choose an exercise")
+                Text("Choose an Food")
                     .font(Font.title2.weight(.heavy))
                     .foregroundColor(Color(.white))
                     .padding(.bottom)
@@ -50,7 +50,7 @@ struct FoodView: View {
                     .frame(width: 100, height: 100, alignment: .center)
                     .shadow(radius: 10)
                 
-                TextField("Enter a exercise", text: $search)
+                TextField("Enter a food", text: $search)
                     .frame(width: 300, height: 40, alignment: .center)
                     .autocapitalization(.none)
                     .background(Color.white)
@@ -58,6 +58,7 @@ struct FoodView: View {
                     .shadow(radius: 10)
                     .cornerRadius(13)
                     .padding()
+                    .multilineTextAlignment(.center)
                 
                 
                 

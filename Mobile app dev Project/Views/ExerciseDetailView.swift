@@ -13,6 +13,8 @@ struct ExerciseDetailView: View {
     
     @State var quantity = ""
     
+    @Environment(\.presentationMode) private var presentationMode : Binding<PresentationMode>
+    
     @Binding var exercise : [ExerciseData]
     
     func calculateQuantity(quantity: String) {
@@ -44,9 +46,11 @@ struct ExerciseDetailView: View {
                     .shadow(radius: 10)
                     .cornerRadius(13)
                     .padding()
+                    .multilineTextAlignment(.center)
                 
                 Button(action: {
                     calculateQuantity(quantity: quantity)
+                    self.presentationMode.wrappedValue.dismiss()
                 }) {
                     Text("Add")
                         .frame(minWidth: 0, maxWidth: 100, minHeight: 0, maxHeight: 50)

@@ -15,12 +15,15 @@ struct FoodDetailView: View {
     @Binding var fat : Double
     @Binding var protein : Double
     
+    //@State var isDisabled = false
+    @Environment(\.presentationMode) private var presentationMode : Binding<PresentationMode>
+    
     @Binding var foodlist : [FoodData]
     
     @State var quantity = ""
     
     func calculateQuantity(quantity: String) {
-        //let finalName = name
+        
         let finalCalories = cal * Double(quantity)!
         let finalFat = fat * Double(quantity)!
         let finalCarbs = carbs * Double(quantity)!
@@ -51,9 +54,11 @@ struct FoodDetailView: View {
                     .shadow(radius: 10)
                     .cornerRadius(13)
                     .padding()
+                    .multilineTextAlignment(.center)
                 
                 Button(action: {
-                    calculateQuantity(quantity: quantity)
+                        calculateQuantity(quantity: quantity)
+                        self.presentationMode.wrappedValue.dismiss()
                 }) {
                     Text("Add")
                         .frame(minWidth: 0, maxWidth: 100, minHeight: 0, maxHeight: 50)

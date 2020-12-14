@@ -24,11 +24,16 @@ struct LoginView: View {
     
     @EnvironmentObject var session: Session
     
+    @State var isLoggedIn = false
+
+    
     func logIn() {
         session.logIn(email: email, password: password) { (result, error) in
             if error != nil {
                 print("Error")
+                isLoggedIn = true
             } else {
+                isLoggedIn = false
                 let user = Auth.auth().currentUser
                 print(user?.uid)
                 shouldNavigate = true
@@ -79,12 +84,17 @@ struct LoginView: View {
                 Button(action: logIn) {
                     Text("Login")
                     .frame(minWidth: 0, maxWidth: 100, minHeight: 0, maxHeight: 50)
+                    
 
                 }
                 .background(Color.black)
                 .foregroundColor(Color.white)
                 .cornerRadius(40)
                 .shadow(radius: 10)
+                .alert(isPresented: $isLoggedIn) {
+                    Alert (title: Text("Error"), message: Text("Wrong credentials, please provide the correct ones!"))
+                }
+                    
 
                 
                 NavigationLink(destination: HomePage(viewModel: UserDataViewModel(data: UserData(id: "test", firstName: "test", lastName: "test", gender: "test", height: "test", weight: "test", age: "test", weightTarget: "test")), logViewModel: logViewModel), isActive: $shouldNavigate) {

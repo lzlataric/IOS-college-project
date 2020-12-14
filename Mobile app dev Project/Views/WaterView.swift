@@ -11,6 +11,9 @@ struct WaterView: View {
     @Binding var waterAmount : Double
     
     @State var quantity = ""
+   
+    @Environment(\.presentationMode) private var presentationMode : Binding<PresentationMode>
+
     
     var body: some View {
         
@@ -33,10 +36,13 @@ struct WaterView: View {
             .shadow(radius: 10)
             .cornerRadius(13)
             .padding()
+            .multilineTextAlignment(.center)
         
         
         Button(action: {
             waterAmount = Double(quantity) ?? 0
+            self.presentationMode.wrappedValue.dismiss()
+
             
         }) {
             Text("Add")

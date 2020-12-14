@@ -33,24 +33,24 @@ struct DateSearchView: View {
                 
                 HStack {
                     
-                    Text("<")
+                    Text(Date(), style: .date)
+                        .font(.headline)
                         .padding(.leading)
-                    Text("\(choosenDate)")
-                        .padding()
-                    Text(">")
                     Spacer()
                         .scaledToFit()
                     Text(viewModel.data.firstName)
+                        .font(.headline)
                     Image(systemName: "person.fill")
                         .padding()
                 }//HStack
                 .padding(.top, 40)
-                .frame(width: 380, height: 80, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                .frame(width: 380, height: 90, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                 .cornerRadius(10)
                 .background(Color(.black))
                 .edgesIgnoringSafeArea(.all)
                 .foregroundColor(.white)
                 .zIndex(1)
+                .shadow(radius: 10)
                 
                 
                 ScrollView {

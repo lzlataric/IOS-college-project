@@ -327,7 +327,7 @@ struct HomePage: View {
                                                 Spacer()
                                                     .frame(width: 40)
                                                 
-                                                VStack {
+                                               // VStack {
                                                     Image(systemName: "trash")
                                                         .onLongPressGesture {
                                                             if(lunchCounter < lunch.count){
@@ -345,9 +345,9 @@ struct HomePage: View {
                                                         .onDisappear{
                                                             lunchCounter -= 1
                                                         }
-                                                }//VStack
-                                                .frame(width: 10, alignment: .trailing)
-                                                .padding(.trailing, 5)
+//                                                }//VStack
+//                                                .frame(width: 10, alignment: .trailing)
+//                                                .padding(.trailing, 5)
                                                 
                                             }//HStack
                                         }

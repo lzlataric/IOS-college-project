@@ -42,6 +42,7 @@ struct ExerciseView: View {
                     .foregroundColor(Color(.white))
                     .padding(.bottom)
                     .shadow(radius: 10)
+                    .multilineTextAlignment(.center)
                 
                 Image("exercise")
                     .resizable()
@@ -56,6 +57,7 @@ struct ExerciseView: View {
                     .shadow(radius: 10)
                     .cornerRadius(13)
                     .padding()
+                    .multilineTextAlignment(.center)
                 
                 
                 if (search == "") {
