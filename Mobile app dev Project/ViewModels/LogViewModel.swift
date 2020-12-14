@@ -122,7 +122,7 @@ final class LogViewModel: ObservableObject {
     }//func getUserInputData
     
     
-    func storeLogData(userId: String, breakfast: [FoodData], dinner: [FoodData], lunch: [FoodData], exercise: [ExerciseData], sleep: Double, weight: Double) {
+    func storeLogData(userId: String, breakfast: [FoodData], dinner: [FoodData], lunch: [FoodData], exercise: [ExerciseData], sleep: Double, weight: Double, water: Double) {
         
         self.dateFormatter.dateFormat = "yyyy-MM-dd"
         let todaysDate = self.dateFormatter.string(from: Date())
@@ -185,7 +185,8 @@ final class LogViewModel: ObservableObject {
                 "currentDate": Date(),
                 "exercise": finalExercise,
                 "sleep": sleep,
-                "weight": weight
+                "weight": weight,
+                "water": water
             ]) { err in
                 if let err = err {
                     print("Error writing document: \(err)")

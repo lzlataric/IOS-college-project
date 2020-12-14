@@ -14,15 +14,16 @@ struct HomePage: View {
     @ObservedObject var logViewModel : LogViewModel
     
     @State var sleep : Double = 0
-    @State var weight: Double = 80
+    @State var weight : Double = 0
+    @State var water : Double = 0
     @State var userId : String = ""
     @State var currentDate = Date()
-    @State var breakfast: [FoodData] = []
-    @State var lunch: [FoodData] = []
-    @State var dinner: [FoodData] = []
-    @State var exerciseData: [ExerciseData] = []
+    @State var breakfast : [FoodData] = []
+    @State var lunch : [FoodData] = []
+    @State var dinner : [FoodData] = []
+    @State var exerciseData : [ExerciseData] = []
     
-    @State var breakfastCounter = 0
+    @State var breakfastCounter = -1
     @State var dinnerCounter = 0
     @State var lunchCounter = 0
     @State var exerciseCounter = 0
@@ -236,13 +237,11 @@ struct HomePage: View {
                                                 Spacer()
                                                     .frame(width: 40)
                                                 
-                                                VStack {
+                                                //VStack {
                                                     Image(systemName: "trash")
                                                         .onLongPressGesture {
                                                             if(breakfastCounter < breakfast.count){
                                                                 breakfast.remove(at: breakfastCounter)
-                                                            }else{
-                                                                breakfastCounter += 1
                                                             }
                                                             caloriesLeft = 0
                                                             calorieIntake = 0
@@ -250,9 +249,15 @@ struct HomePage: View {
                                                             goalCalories = 2500
                                                             calorieCalculation()
                                                         }
-                                                }//VStack
-                                                .frame(width: 10, alignment: .trailing)
-                                                .padding(.trailing, 5)
+                                                        .onAppear{
+                                                            breakfastCounter += 1
+                                                        }
+                                                        .onDisappear{
+                                                            breakfastCounter -= 1
+                                                        }
+//                                                }//VStack
+//                                                .frame(width: 10, alignment: .trailing)
+//                                                .padding(.trailing, 5)
                                                 
                                                 
                                             }//HStack
@@ -327,14 +332,18 @@ struct HomePage: View {
                                                         .onLongPressGesture {
                                                             if(lunchCounter < lunch.count){
                                                                 lunch.remove(at: lunchCounter)
-                                                            }else{
-                                                                lunchCounter += 1
                                                             }
                                                             caloriesLeft = 0
                                                             calorieIntake = 0
                                                             caloriesBurnedWithExercise = 0
                                                             goalCalories = 2500
                                                             calorieCalculation()
+                                                        }
+                                                        .onAppear{
+                                                            lunchCounter += 1
+                                                        }
+                                                        .onDisappear{
+                                                            lunchCounter -= 1
                                                         }
                                                 }//VStack
                                                 .frame(width: 10, alignment: .trailing)
@@ -412,14 +421,18 @@ struct HomePage: View {
                                                         .onLongPressGesture {
                                                             if(dinnerCounter < dinner.count){
                                                                 dinner.remove(at: dinnerCounter)
-                                                            }else{
-                                                                dinnerCounter += 1
                                                             }
                                                             caloriesLeft = 0
                                                             calorieIntake = 0
                                                             caloriesBurnedWithExercise = 0
                                                             goalCalories = 2500
                                                             calorieCalculation()
+                                                        }
+                                                        .onAppear{
+                                                            dinnerCounter += 1
+                                                        }
+                                                        .onDisappear{
+                                                            dinnerCounter -= 1
                                                         }
                                                 }//VStack
                                                 .frame(width: 10, alignment: .trailing)
@@ -497,13 +510,20 @@ struct HomePage: View {
                                                 VStack {
                                                     Image(systemName: "trash")
                                                         .onLongPressGesture {
-                                                            exerciseData.remove(at: exerciseCounter)
-                                                            exerciseCounter += 1
+                                                            if(exerciseCounter < exerciseData.count){
+                                                                exerciseData.remove(at: exerciseCounter)
+                                                            }
                                                             caloriesLeft = 0
                                                             calorieIntake = 0
                                                             caloriesBurnedWithExercise = 0
                                                             goalCalories = 2500
                                                             calorieCalculation()
+                                                        }
+                                                        .onAppear{
+                                                            exerciseCounter += 1
+                                                        }
+                                                        .onDisappear{
+                                                            exerciseCounter -= 1
                                                         }
                                                 }//VStack
                                                 .frame(width: 10, alignment: .trailing)
@@ -527,8 +547,233 @@ struct HomePage: View {
                             .foregroundColor(.white)
                             .shadow(radius: 10)
                             
+                            HStack{
+                                
+                                VStack{
+                                    
+                                    HStack {
+                                        Text("Weight")
+                                            .padding()
+                                            .font(.headline)
+                                        
+                                        Spacer()
+                                            .frame(width: 190)
+                                        
+                                        NavigationLink(destination: WeightView(weightAmount: $weight)) {
+                                            EmptyView()
+                                            Text("+")
+                                                .foregroundColor(.white)
+                                                .font(.headline)
+                                        }//NavigationLink
+                                        .background(Color(.black))
+                                        .cornerRadius(15)
+                                        .padding()
+                                        
+                                    }//HStack
+                                    .font(.system(size: 12))
+                                    
+                                    Spacer()
+                                    
+                                    VStack {
+                                            HStack {
+                                                VStack {
+                                                    Text("Weight")
+                                                }//VStack
+                                                .frame(width: 110, alignment: .leading)
+                                                .padding(.leading, 5)
+                                                
+                                                Spacer()
+                                                    .frame(width: 50)
+                                                
+                                                VStack {
+                                                    Text(String(weight))
+                                                }//VStack
+                                                .frame(width: 60, alignment: .trailing)
+                                                
+                                                
+                                                Spacer()
+                                                    .frame(width: 40)
+                                                
+                                                VStack {
+                                                    Image(systemName: "trash")
+                                                        .onLongPressGesture {
+                                                            weight = 0
+                                                        }
+                                                }//VStack
+                                                .frame(width: 10, alignment: .trailing)
+                                                .padding(.trailing, 5)
+                                                
+                                            }//HStack
+                                        
+                                        
+                                    }//VStack
+                                    .scaledToFit()
+                                    .padding(.bottom)
+                                    .frame(alignment: .leading)
+                                    
+                                }//VStack
+                                
+                                
+                            }//HStack
+                            .frame(width: 350, alignment: .leading)
+                            .background(Color(.black))
+                            .cornerRadius(15)
+                            .foregroundColor(.white)
+                            .shadow(radius: 10)
+                            
+                            
+                            HStack{
+                                
+                                VStack{
+                                    
+                                    HStack {
+                                        Text("Sleep")
+                                            .padding()
+                                            .font(.headline)
+                                        
+                                        Spacer()
+                                            .frame(width: 190)
+                                        
+                                        NavigationLink(destination: SleepView(sleepAmount: $sleep)) {
+                                            EmptyView()
+                                            Text("+")
+                                                .foregroundColor(.white)
+                                                .font(.headline)
+                                        }//NavigationLink
+                                        .background(Color(.black))
+                                        .cornerRadius(15)
+                                        .padding()
+                                        
+                                    }//HStack
+                                    .font(.system(size: 12))
+                                    
+                                    Spacer()
+                                    
+                                    VStack {
+                                            HStack {
+                                                VStack {
+                                                    Text("Sleep")
+                                                }//VStack
+                                                .frame(width: 110, alignment: .leading)
+                                                .padding(.leading, 5)
+                                                
+                                                Spacer()
+                                                    .frame(width: 50)
+                                                
+                                                VStack {
+                                                    Text(String(sleep))
+                                                }//VStack
+                                                .frame(width: 60, alignment: .trailing)
+                                                
+                                                
+                                                Spacer()
+                                                    .frame(width: 40)
+                                                
+                                                VStack {
+                                                    Image(systemName: "trash")
+                                                        .onLongPressGesture {
+                                                            sleep = 0
+                                                        }
+                                                }//VStack
+                                                .frame(width: 10, alignment: .trailing)
+                                                .padding(.trailing, 5)
+                                                
+                                            }//HStack
+                                        
+                                        
+                                    }//VStack
+                                    .scaledToFit()
+                                    .padding(.bottom)
+                                    .frame(alignment: .leading)
+                                    
+                                }//VStack
+                                
+                                
+                            }//HStack
+                            .frame(width: 350, alignment: .leading)
+                            .background(Color(.black))
+                            .cornerRadius(15)
+                            .foregroundColor(.white)
+                            .shadow(radius: 10)
+                            
+                            HStack{
+                                
+                                VStack{
+                                    
+                                    HStack {
+                                        Text("Water")
+                                            .padding()
+                                            .font(.headline)
+                                        
+                                        Spacer()
+                                            .frame(width: 190)
+                                        
+                                        NavigationLink(destination: WaterView(waterAmount: $water)) {
+                                            EmptyView()
+                                            Text("+")
+                                                .foregroundColor(.white)
+                                                .font(.headline)
+                                        }//NavigationLink
+                                        .background(Color(.black))
+                                        .cornerRadius(15)
+                                        .padding()
+                                        
+                                    }//HStack
+                                    .font(.system(size: 12))
+                                    
+                                    Spacer()
+                                    
+                                    VStack {
+                                            HStack {
+                                                VStack {
+                                                    Text("Water")
+                                                }//VStack
+                                                .frame(width: 110, alignment: .leading)
+                                                .padding(.leading, 5)
+                                                
+                                                Spacer()
+                                                    .frame(width: 50)
+                                                
+                                                VStack {
+                                                    Text(String(water))
+                                                }//VStack
+                                                .frame(width: 60, alignment: .trailing)
+                                                
+                                                
+                                                Spacer()
+                                                    .frame(width: 40)
+                                                
+                                                VStack {
+                                                    Image(systemName: "trash")
+                                                        .onLongPressGesture {
+                                                            water = 0
+                                                        }
+                                                }//VStack
+                                                .frame(width: 10, alignment: .trailing)
+                                                .padding(.trailing, 5)
+                                                
+                                            }//HStack
+                                        
+                                        
+                                    }//VStack
+                                    .scaledToFit()
+                                    .padding(.bottom)
+                                    .frame(alignment: .leading)
+                                    
+                                }//VStack
+                                
+                                
+                            }//HStack
+                            .frame(width: 350, alignment: .leading)
+                            .background(Color(.black))
+                            .cornerRadius(15)
+                            .foregroundColor(.white)
+                            .shadow(radius: 10)
+                            
+                            Group {
+                            
                             Button(action: {
-                                logViewModel.storeLogData(userId: user?.uid ?? "" , breakfast: breakfast, dinner: dinner, lunch: lunch, exercise: exerciseData, sleep: sleep, weight: weight)
+                                logViewModel.storeLogData(userId: user?.uid ?? "" , breakfast: breakfast, dinner: dinner, lunch: lunch, exercise: exerciseData, sleep: sleep, weight: weight, water: water)
                                 self.disableStoreButton = true
                                 
                             }) {
@@ -544,6 +789,7 @@ struct HomePage: View {
                             
                             Spacer()
                                 .frame(height: 70)
+                            }
                             
                         }//VStack
                         
@@ -561,10 +807,6 @@ struct HomePage: View {
                 caloriesBurnedWithExercise = 0
                 goalCalories = 2500
                 calorieCalculation()
-                breakfastCounter=0
-                lunchCounter = 0
-                dinnerCounter = 0
-                exerciseCounter = 0
             }
             .tabItem {
                 Image("homePage")

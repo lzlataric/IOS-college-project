@@ -26,6 +26,7 @@ struct Log: Identifiable, Codable {
     var sleep : Double
     var exercise : [ExerciseData]
     var weight : Double
+    var water : Double
     var actualDate : Date {
         currentDate.dateValue()
     }
@@ -39,5 +40,6 @@ struct Log: Identifiable, Codable {
         case sleep
         case exercise
         case weight
+        case water
     }
 }

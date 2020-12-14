@@ -14,16 +14,6 @@ struct DateSearchView: View {
     @ObservedObject var logViewModel : LogViewModel
     @Binding var choosenDate : Date
     
-//    var sleep : Double = 0
-//    var weight: Double = 0
-//    var userId : String = ""
-//    var currentDate = Date()
-//    var breakfast: [FoodData] = [FoodData(name: "1", cal: 0, carbs: 0, fat: 0, protein: 0)]
-//    var lunch: [FoodData] = [FoodData(name: "2", cal: 0, carbs: 0, fat: 0, protein: 0)]
-//    var dinner: [FoodData] = [FoodData(name: "3", cal: 0, carbs: 0, fat: 0, protein: 0)]
-//    var exercise: [ExerciseData] = [ExerciseData(exerciseName: "4", caloriesBurned: 0)]
-    
-
     @State private var shouldNavigate = true
     
     //General UI properties
@@ -109,31 +99,36 @@ struct DateSearchView: View {
                                 Text("Your goal")
                                     .font(.system(size: 12))
                                 Text(String(logViewModel.goalCalories))
+                                    .padding(.top)
                             }
                             Text("+")
+                                .padding(.top, 35)
                             VStack {
                                 Text("Exercise")
                                     .font(.system(size: 12))
                                 Text(String(logViewModel.caloriesBurnedWithExercise))
+                                    .padding(.top)
                             }
                             Text("-")
-                                .padding(.top)
+                                .padding(.top, 35)
                             VStack {
                                 Text("Calories Eaten")
                                     .font(.system(size: 12))
                                 Text(String(logViewModel.calorieIntake))
+                                    .padding(.top)
                             }
                             Text("=")
+                                .padding(.top, 35)
                             VStack {
                                 Text("Calories left")
                                     .font(.system(size: 12))
                                 if(logViewModel.caloriesLeft < 0) {
                                     Text(String(logViewModel.caloriesLeft))
                                         .foregroundColor(Color(.red))
-                                } else {
+                                        .padding(.top)                                } else {
                                     Text(String(logViewModel.caloriesLeft))
                                         .foregroundColor(Color(.green))
-                                }
+                                        .padding(.top)                                }
                             }
                             
                             
@@ -142,8 +137,7 @@ struct DateSearchView: View {
                         .background(Color(.black))
                         .cornerRadius(15)
                         .foregroundColor(.white)
-                        
-                        
+                        .shadow(radius: 10)
                         
                         
                         HStack{
@@ -153,6 +147,7 @@ struct DateSearchView: View {
                                 HStack {
                                     Text("Breakfast")
                                         .padding()
+                                        .font(.headline)
                                     
                                     Spacer()
                                         .frame(width: 200)
@@ -163,24 +158,27 @@ struct DateSearchView: View {
                                 Spacer()
                                 
                                 
-                                
-                                // Text(logViewModel.data.first?.breakfast.first?.name ?? "no data")
-                                
                                 VStack {
                                     ForEach(logViewModel.data) { data in
                                         ForEach(data.breakfast) { breakfast in
-                                            //Text(String(describing: data.actualDate))
                                             HStack {
                                                 VStack {
                                                     Text(breakfast.name)
                                                 }//VStack
-                                                .frame(alignment: .leading)
+                                                .frame(width: 110, alignment: .leading)
+                                                .padding(.leading, 5)
+                                                
                                                 Spacer()
-                                                    .frame(width: 30)
+                                                    .frame(width: 50)
+                                                
                                                 VStack {
-                                                    Text(String(breakfast.cal))
+                                                    Text(String(round(1000*breakfast.cal)/1000))
                                                 }//VStack
-                                                .frame(alignment: .leading)
+                                                .frame(width: 60, alignment: .trailing)
+                                                
+                                                Spacer()
+                                                    .frame(width: 40)
+                                                
                                             }//HStack
                                             
                                         }
@@ -198,6 +196,7 @@ struct DateSearchView: View {
                         .background(Color(.black))
                         .cornerRadius(15)
                         .foregroundColor(.white)
+                        .shadow(radius: 10)
                         
                         
                         HStack{
@@ -207,41 +206,56 @@ struct DateSearchView: View {
                                 HStack {
                                     Text("Lunch")
                                         .padding()
+                                        .font(.headline)
+                                    
+                                    Spacer()
+                                        .frame(width: 200)
                                     
                                 }//HStack
                                 .font(.system(size: 12))
                                 
                                 Spacer()
                                 
-                                    VStack {
-                                        ForEach(logViewModel.data) { data in
-                                            ForEach(data.lunch) { lunch in
-                                                //Text(String(describing: data.actualDate))
-                                                HStack {
-                                                    VStack {
-                                                        Text(lunch.name)
-                                                    }//VStack
-                                                    .frame(alignment: .leading)
-                                                    Spacer()
-                                                        .frame(width: 30)
-                                                    VStack {
-                                                        Text(String(lunch.cal))
-                                                    }//VStack
-                                                    .frame(alignment: .leading)
-                                                }//HStack
+                                
+                                VStack {
+                                    ForEach(logViewModel.data) { data in
+                                        ForEach(data.lunch) { lunch in
+                                            HStack {
+                                                VStack {
+                                                    Text(lunch.name)
+                                                }//VStack
+                                                .frame(width: 110, alignment: .leading)
+                                                .padding(.leading, 5)
                                                 
-                                            }
+                                                Spacer()
+                                                    .frame(width: 50)
+                                                
+                                                VStack {
+                                                    Text(String(round(1000*lunch.cal)/1000))
+                                                }//VStack
+                                                .frame(width: 60, alignment: .trailing)
+                                                
+                                                Spacer()
+                                                    .frame(width: 40)
+                                                
+                                            }//HStack
+                                            
                                         }
-                                    }//VStack
- 
+                                    }
+                                }//VStack
+                                .scaledToFit()
+                                .padding(.bottom)
+                                .frame(alignment: .leading)
+                                
                             }//VStack
                             
                             
                         }//HStack
-                        .frame(width: 350, height: 100, alignment: .center)
+                        .frame(width: 350, alignment: .leading)
                         .background(Color(.black))
                         .cornerRadius(15)
                         .foregroundColor(.white)
+                        .shadow(radius: 10)
                         
                         
                         HStack{
@@ -251,42 +265,56 @@ struct DateSearchView: View {
                                 HStack {
                                     Text("Dinner")
                                         .padding()
+                                        .font(.headline)
+                                    
+                                    Spacer()
+                                        .frame(width: 200)
+                                    
                                 }//HStack
                                 .font(.system(size: 12))
                                 
                                 Spacer()
                                 
+                                
                                 VStack {
                                     ForEach(logViewModel.data) { data in
                                         ForEach(data.dinner) { dinner in
-                                            //Text(String(describing: data.actualDate))
                                             HStack {
                                                 VStack {
                                                     Text(dinner.name)
                                                 }//VStack
-                                                .frame(alignment: .leading)
+                                                .frame(width: 110, alignment: .leading)
+                                                .padding(.leading, 5)
+                                                
                                                 Spacer()
-                                                    .frame(width: 30)
+                                                    .frame(width: 50)
+                                                
                                                 VStack {
-                                                    Text(String(dinner.cal))
+                                                    Text(String(round(1000*dinner.cal)/1000))
                                                 }//VStack
-                                                .frame(alignment: .leading)
+                                                .frame(width: 60, alignment: .trailing)
+                                                
+                                                Spacer()
+                                                    .frame(width: 40)
+                                                
                                             }//HStack
                                             
                                         }
                                     }
                                 }//VStack
-                                
-                                
+                                .scaledToFit()
+                                .padding(.bottom)
+                                .frame(alignment: .leading)
                                 
                             }//VStack
                             
                             
                         }//HStack
-                        .frame(width: 350, height: 100, alignment: .center)
+                        .frame(width: 350, alignment: .leading)
                         .background(Color(.black))
                         .cornerRadius(15)
                         .foregroundColor(.white)
+                        .shadow(radius: 10)
                         
                         
                         HStack{
@@ -296,42 +324,223 @@ struct DateSearchView: View {
                                 HStack {
                                     Text("Exercise")
                                         .padding()
+                                        .font(.headline)
+                                    
+                                    Spacer()
+                                        .frame(width: 200)
+                                    
                                 }//HStack
                                 .font(.system(size: 12))
                                 
                                 Spacer()
                                 
+                                
                                 VStack {
                                     ForEach(logViewModel.data) { data in
                                         ForEach(data.exercise) { exercise in
-                                            //Text(String(describing: data.actualDate))
                                             HStack {
                                                 VStack {
                                                     Text(exercise.exerciseName)
                                                 }//VStack
-                                                .frame(alignment: .leading)
+                                                .frame(width: 110, alignment: .leading)
+                                                .padding(.leading, 5)
+                                                
                                                 Spacer()
-                                                    .frame(width: 30)
+                                                    .frame(width: 50)
+                                                
                                                 VStack {
                                                     Text(String(exercise.caloriesBurned))
                                                 }//VStack
-                                                .frame(alignment: .leading)
+                                                .frame(width: 60, alignment: .trailing)
+                                                
+                                                Spacer()
+                                                    .frame(width: 40)
+                                                
                                             }//HStack
                                             
                                         }
                                     }
                                 }//VStack
+                                .scaledToFit()
+                                .padding(.bottom)
+                                .frame(alignment: .leading)
                                 
                             }//VStack
                             
                             
                         }//HStack
-                        .frame(width: 350, height: 100, alignment: .center)
+                        .frame(width: 350, alignment: .leading)
                         .background(Color(.black))
                         .cornerRadius(15)
                         .foregroundColor(.white)
+                        .shadow(radius: 10)
                         
+                        HStack{
+                            
+                            VStack{
+                                
+                                HStack {
+                                    Text("Weight")
+                                        .padding()
+                                        .font(.headline)
+                                    
+                                    Spacer()
+                                        .frame(width: 200)
+                                    
+                                }//HStack
+                                .font(.system(size: 12))
+                                
+                                Spacer()
+                                
+                                
+                                VStack {
+                                    ForEach(logViewModel.data) { data in
+                                            HStack {
+                                                VStack {
+                                                    Text("Weight")
+                                                }//VStack
+                                                .frame(width: 110, alignment: .leading)
+                                                .padding(.leading, 5)
+                                                
+                                                Spacer()
+                                                    .frame(width: 50)
+                                                
+                                                VStack {
+                                                    Text(String(data.weight))
+                                                }//VStack
+                                                .frame(width: 60, alignment: .trailing)
+                                                
+                                                Spacer()
+                                                    .frame(width: 40)
+                                                
+                                            }//HStack
+                                    }
+
+                                }//VStack
+                                .scaledToFit()
+                                .padding(.bottom)
+                                .frame(alignment: .leading)
+                                
+                            }//VStack
+                            
+                            
+                        }//HStack
+                        .frame(width: 350, alignment: .leading)
+                        .background(Color(.black))
+                        .cornerRadius(15)
+                        .foregroundColor(.white)
+                        .shadow(radius: 10)
                         
+                        HStack{
+                            VStack{
+                                
+                                HStack {
+                                    Text("Sleep")
+                                        .padding()
+                                        .font(.headline)
+                                    
+                                    Spacer()
+                                        .frame(width: 200)
+                                    
+                                }//HStack
+                                .font(.system(size: 12))
+                                
+                                Spacer()
+                                
+                                
+                                VStack {
+                                    ForEach(logViewModel.data) { data in
+                                            HStack {
+                                                VStack {
+                                                    Text("Sleep")
+                                                }//VStack
+                                                .frame(width: 110, alignment: .leading)
+                                                .padding(.leading, 5)
+                                                
+                                                Spacer()
+                                                    .frame(width: 50)
+                                                
+                                                VStack {
+                                                    Text(String(data.sleep))
+                                                }//VStack
+                                                .frame(width: 60, alignment: .trailing)
+                                                
+                                                Spacer()
+                                                    .frame(width: 40)
+                                                
+                                            }//HStack
+                                    }
+
+                                }//VStack
+                                .scaledToFit()
+                                .padding(.bottom)
+                                .frame(alignment: .leading)
+                                
+                            }//VStack
+                            
+                            
+                        }//HStack
+                        .frame(width: 350, alignment: .leading)
+                        .background(Color(.black))
+                        .cornerRadius(15)
+                        .foregroundColor(.white)
+                        .shadow(radius: 10)
+                        
+                        HStack{
+                            
+                            VStack{
+                                
+                                HStack {
+                                    Text("Water")
+                                        .padding()
+                                        .font(.headline)
+                                    
+                                    Spacer()
+                                        .frame(width: 200)
+                                    
+                                }//HStack
+                                .font(.system(size: 12))
+                                
+                                Spacer()
+                                
+                                
+                                VStack {
+                                    ForEach(logViewModel.data) { data in
+                                            HStack {
+                                                VStack {
+                                                    Text("Water")
+                                                }//VStack
+                                                .frame(width: 110, alignment: .leading)
+                                                .padding(.leading, 5)
+                                                
+                                                Spacer()
+                                                    .frame(width: 50)
+                                                
+                                                VStack {
+                                                    Text(String(data.water))
+                                                }//VStack
+                                                .frame(width: 60, alignment: .trailing)
+                                                
+                                                Spacer()
+                                                    .frame(width: 40)
+                                                
+                                            }//HStack
+                                    }
+
+                                }//VStack
+                                .scaledToFit()
+                                .padding(.bottom)
+                                .frame(alignment: .leading)
+                                
+                            }//VStack
+                            
+                            
+                        }//HStack
+                        .frame(width: 350, alignment: .leading)
+                        .background(Color(.black))
+                        .cornerRadius(15)
+                        .foregroundColor(.white)
+                        .shadow(radius: 10)
                         
                     }//VStack
                     

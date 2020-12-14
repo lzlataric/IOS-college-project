@@ -22,6 +22,9 @@
 		547533DE257E675400829524 /* FoodDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547533DD257E675300829524 /* FoodDataViewModel.swift */; };
 		547533E1257E70AD00829524 /* FoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547533E0257E70AD00829524 /* FoodView.swift */; };
 		549065CE25852F90008B2A76 /* FoodDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549065CD25852F90008B2A76 /* FoodDetailView.swift */; };
+		54ADC2712587A04900BDA1C9 /* WeightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ADC2702587A04900BDA1C9 /* WeightView.swift */; };
+		54ADC2752587A74900BDA1C9 /* SleepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ADC2742587A74900BDA1C9 /* SleepView.swift */; };
+		54ADC2782587AA4300BDA1C9 /* WaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ADC2772587AA4300BDA1C9 /* WaterView.swift */; };
 		54B7C0FF2566A57E0085B100 /* Mobile_app_dev_ProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B7C0FE2566A57E0085B100 /* Mobile_app_dev_ProjectApp.swift */; };
 		54B7C1012566A57E0085B100 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B7C1002566A57E0085B100 /* ContentView.swift */; };
 		54B7C1032566A5800085B100 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54B7C1022566A5800085B100 /* Assets.xcassets */; };
@@ -52,6 +55,9 @@
 		547533DD257E675300829524 /* FoodDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDataViewModel.swift; sourceTree = "<group>"; };
 		547533E0257E70AD00829524 /* FoodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodView.swift; sourceTree = "<group>"; };
 		549065CD25852F90008B2A76 /* FoodDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailView.swift; sourceTree = "<group>"; };
+		54ADC2702587A04900BDA1C9 /* WeightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightView.swift; sourceTree = "<group>"; };
+		54ADC2742587A74900BDA1C9 /* SleepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepView.swift; sourceTree = "<group>"; };
+		54ADC2772587AA4300BDA1C9 /* WaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterView.swift; sourceTree = "<group>"; };
 		54B7C0FB2566A57E0085B100 /* Mobile app dev Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mobile app dev Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		54B7C0FE2566A57E0085B100 /* Mobile_app_dev_ProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mobile_app_dev_ProjectApp.swift; sourceTree = "<group>"; };
 		54B7C1002566A57E0085B100 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -174,6 +180,9 @@
 				549065CD25852F90008B2A76 /* FoodDetailView.swift */,
 				54C8E3E225865DAD000D4EF0 /* DatePickerView.swift */,
 				5442A82A2586931F00163C0E /* WeightTrackerView.swift */,
+				54ADC2702587A04900BDA1C9 /* WeightView.swift */,
+				54ADC2742587A74900BDA1C9 /* SleepView.swift */,
+				54ADC2772587AA4300BDA1C9 /* WaterView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -324,6 +333,8 @@
 				54C8E3E325865DAD000D4EF0 /* DatePickerView.swift in Sources */,
 				54D7D7CF256958D000E60A09 /* Session.swift in Sources */,
 				54B7C1012566A57E0085B100 /* ContentView.swift in Sources */,
+				54ADC2782587AA4300BDA1C9 /* WaterView.swift in Sources */,
+				54ADC2712587A04900BDA1C9 /* WeightView.swift in Sources */,
 				54E6B46E25692FF800076D52 /* Log.swift in Sources */,
 				541934DE257FE0C400F0921C /* ExerciseDataViewModel.swift in Sources */,
 				54D7D7E5256A9EF300E60A09 /* LoginView.swift in Sources */,
@@ -339,6 +350,7 @@
 				541934E4257FF5A000F0921C /* LogViewModel.swift in Sources */,
 				5442A82B2586931F00163C0E /* WeightTrackerView.swift in Sources */,
 				54E6B46825692EA300076D52 /* ExerciseData.swift in Sources */,
+				54ADC2752587A74900BDA1C9 /* SleepView.swift in Sources */,
 				547533E1257E70AD00829524 /* FoodView.swift in Sources */,
 				547533DE257E675400829524 /* FoodDataViewModel.swift in Sources */,
 				549065CE25852F90008B2A76 /* FoodDetailView.swift in Sources */,

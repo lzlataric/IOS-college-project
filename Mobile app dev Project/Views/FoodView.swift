@@ -27,7 +27,7 @@ struct FoodView: View {
     func getData(search: String) -> [FoodData] {
         
         let filtered = foods.data.filter { (obj: FoodData) in
-            obj.name.contains(search)
+            obj.name.lowercased().contains(search)
         }
         return filtered
     }
@@ -87,8 +87,14 @@ struct FoodView: View {
                         List(getData(search: search)) { data in
                             VStack(alignment: .leading) {
                                 Text(data.name)
-                                    .onLongPressGesture {
-                                        breakfast.append(data)
+                                    .onTapGesture {
+                                        
+                                        self.name = data.name
+                                        self.cal = data.cal
+                                        self.carbs = data.carbs
+                                        self.fat = data.fat
+                                        self.protein = data.protein
+                                        self.shouldNavigate = true
                                         print(breakfast)
                                     }
                             }//VStack
