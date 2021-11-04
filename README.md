@@ -1,5 +1,4 @@
 # IOS-project
-
 My first project done in IOS development
 
 Final project made for ISTE-454-Mobile-application-development-I in collaboration with Dominik Bošnjak.
